@@ -3,67 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan's Kitchen - Delicious Food Delivered</title>
+    <title>AryanStore - Groceries & More</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icon Library for the nav bar -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>Aryan's Kitchen</h1>
-            <p>Your Favorite Food, Delivered Fast.</p>
+    <header class="app-header">
+        <div class="header-content">
+            <span class="material-icons">menu</span>
+            <div class="logo">AryanStore</div>
+            <div class="header-actions">
+                <span class="material-icons">search</span>
+                <span class="material-icons">shopping_cart</span>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <div class="content-wrapper">
-            <!-- Menu Section -->
-            <section class="menu-section">
-                <h2>Our Menu</h2>
-                <!-- The entire categorized menu will be dynamically injected here -->
-                <div id="full-menu">
-                    <p class="loading-menu">Loading our delicious menu...</p>
-                </div>
-            </section>
+    <main class="app-content">
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974&auto=format&fit=crop" alt="Fresh groceries">
+            <div class="hero-text">
+                <h2>Fresh Groceries, Delivered Fast</h2>
+                <p>Everything you need, right at your doorstep.</p>
+            </div>
+        </section>
 
-            <!-- Cart Section -->
-            <aside class="cart-section">
-                <h2>Your Order</h2>
-                <div id="cart-items" class="cart-items-container">
-                    <p class="cart-empty-message">Your cart is empty.</p>
-                </div>
-                <div class="cart-total">
-                    <strong>Total:</strong>
-                    <span id="total-price">₹0.00</span>
-                </div>
-                <button id="place-order-btn" class="btn-primary" disabled>Place Order</button>
-            </aside>
-        </div>
+        <!-- Categories Section -->
+        <section class="category-grid">
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635ba4?w=400&h=400&fit=crop" alt="Fruits & Vegetables">
+                <span>Fruits & Veg</span>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1550535029-6e3e5da5a782?w=400&h=400&fit=crop" alt="Dairy & Bread">
+                <span>Dairy & Bread</span>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1627461933423-625b2a03350b?w=400&h=400&fit=crop" alt="Snacks & Drinks">
+                <span>Snacks & Drinks</span>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1599493397143-4a1b52a412cc?w=400&h=400&fit=crop" alt="Ready to Eat">
+                <span>Ready to Eat</span>
+            </div>
+        </section>
+
+        <!-- Bestsellers Section -->
+        <section class="product-section">
+            <h2 class="section-title">Bestsellers</h2>
+            <div class="product-grid" id="product-list">
+                <!-- Product cards will be injected here by JavaScript -->
+            </div>
+        </section>
     </main>
 
-    <!-- Payment Modal -->
-    <div id="payment-modal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Complete Your Payment</h2>
-            <p>Scan the QR code with any UPI app or use the UPI ID below.</p>
-            <div id="qr-code-container">
-                <img id="qr-code-img" src="" alt="UPI QR Code">
-            </div>
-            <p class="upi-details">
-                <strong>Amount:</strong> <span id="payment-amount"></span><br>
-                <strong>UPI ID:</strong> aryanwithrizz@ybl
-            </p>
-            <p class="payment-note">After payment, please send a confirmation screenshot via WhatsApp (or your preferred contact method).</p>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Aryan's Kitchen. All Rights Reserved.</p>
-    </footer>
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <span class="material-icons">home</span>
+            <span class="nav-text">Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="material-icons">grid_view</span>
+            <span class="nav-text">Categories</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="material-icons">shopping_bag</span>
+            <span class="nav-text">Orders</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="material-icons">person</span>
+            <span class="nav-text">Profile</span>
+        </a>
+    </nav>
 
     <script src="script.js"></script>
 </body>
