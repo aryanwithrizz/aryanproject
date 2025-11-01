@@ -1,0 +1,154 @@
+:root {
+    --primary-color: #E23744; /* Zomato Red */
+    --secondary-color: #F8F8F8;
+    --text-color: #333;
+    --border-color: #E0E0E0;
+    --white-color: #FFFFFF;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: var(--primary-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.menu-section {
+    flex: 3;
+}
+
+.cart-section {
+    flex: 1;
+    background: var(--white-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    align-self: flex-start; /* Sticks to the top */
+    position: sticky;
+    top: 20px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.menu-item {
+    background: var(--white-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease-in-out;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+}
+
+.menu-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.menu-item-content {
+    padding: 15px;
+}
+
+.menu-item-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.btn-add-cart {
+    background: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-add-cart:hover {
+    background: #c02d39;
+}
+
+/* Cart Styles */
+.cart-section h2 { margin-top: 0; }
+.cart-empty-message { color: #888; text-align: center; padding: 20px 0; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+.cart-item:last-child { border-bottom: none; }
+.cart-item-name { font-weight: 500; }
+.cart-total { margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--text-color); display: flex; justify-content: space-between; font-size: 1.2rem; }
+
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: #28a745; /* Green for go */
+    color: var(--white-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s;
+}
+.btn-primary:hover { background: #218838; }
+.btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+
+/* Modal Styles */
+.modal-overlay { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
+.modal-content { background-color: var(--white-color); margin: 15% auto; padding: 30px; border-radius: 8px; width: 90%; max-width: 400px; text-align: center; position: relative; }
+.close-modal { position: absolute; top: 10px; right: 20px; color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
+#qr-code-container img { max-width: 200px; margin: 20px auto; display: block; }
+.upi-details { background: #f0f0f0; padding: 15px; border-radius: 5px; word-break: break-all; }
+.payment-note { font-size: 0.9rem; color: #555; margin-top: 20px; }
+
+footer { text-align: center; padding: 20px; margin-top: 40px; background-color: #333; color: #ccc; }
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .content-wrapper { flex-direction: column; }
+    .cart-section { position: static; margin-top: 30px; }
+}
