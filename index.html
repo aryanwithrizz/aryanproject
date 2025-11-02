@@ -264,9 +264,120 @@
 </div>
         </div>
     </footer>
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg w-96">
+            <h3 class="text-2xl font-bold mb-6 text-center">Login / Sign Up</h3>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 border rounded" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" class="w-full px-4 py-2 border rounded" required>
+                </div>
+                <button type="submit" class="w-full bg-amazon-primary text-black py-2 rounded font-bold mb-4">Continue</button>
+                <p class="text-sm text-center">New to Aryan's Mega Bazaar? <a href="#" class="text-amazon-blue">Create account</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Your Cart</h3>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-black">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div id="cartItems" class="mb-6">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div class="border-t pt-4">
+                <div class="flex justify-between mb-4">
+                    <span class="font-bold">Subtotal:</span>
+                    <span id="cartSubtotal" class="font-bold">₹0</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="w-full bg-amazon-primary text-black py-2 rounded font-bold">Proceed to Buy</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Checkout</h3>
+                <button onclick="toggleCheckout()" class="text-gray-500 hover:text-black">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                    <div class="bg-gray-50 p-4 rounded mb-4">
+                        <h4 class="font-bold mb-2">Delivery Address</h4>
+                        <div class="space-y-2">
+                            <input type="text" placeholder="Full Name" class="w-full p-2 border rounded">
+                            <input type="text" placeholder="Mobile Number" class="w-full p-2 border rounded">
+                            <textarea placeholder="Full Address" class="w-full p-2 border rounded"></textarea>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded">
+                        <h4 class="font-bold mb-2">Payment Method</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="payment" checked>
+                                <span>UPI (aryanwithrizz@ybl)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="payment">
+                                <span>Cash on Delivery</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-gray-50 p-4 rounded">
+                        <h4 class="font-bold mb-2">Order Summary</h4>
+                        <div id="checkoutItems" class="mb-4">
+                            <!-- Order items will be dynamically inserted here -->
+                        </div>
+                        <div class="space-y-2 border-t pt-2">
+                            <div class="flex justify-between">
+                                <span>Subtotal:</span>
+                                <span id="checkoutSubtotal">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Delivery:</span>
+                                <span>FREE</span>
+                            </div>
+                            <div class="flex justify-between font-bold">
+                                <span>Total:</span>
+                                <span id="checkoutTotal">₹0</span>
+                            </div>
+                        </div>
+                        <button onclick="placeOrder()" class="w-full bg-amazon-primary text-black py-2 rounded font-bold mt-4">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="orderConfirmation" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg w-96 text-center">
+            <div class="text-green-500 mb-4">
+                <i data-feather="check-circle" class="w-16 h-16 mx-auto"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Order Placed Successfully!</h3>
+            <p class="mb-4">Your order #<span id="orderNumber"></span> has been confirmed.</p>
+            <p class="mb-6">Payment received to aryanwithrizz@ybl</p>
+            <button onclick="closeOrderConfirmation()" class="w-full bg-amazon-primary text-black py-2 rounded font-bold">Continue Shopping</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script>feather.replace();</script>
-<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
-</body>
-</html>
+    </html>
