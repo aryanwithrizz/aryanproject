@@ -1,8 +1,77 @@
-/* Custom styles for Amazon India Clone */
-body {
-    font-family: 'Amazon Ember', Arial, sans-serif;
+
+/* Modern Color Grading and Styles */
+:root {
+    --primary: #2563eb;
+    --primary-light: #3b82f6;
+    --secondary: #1e40af;
+    --accent: #f59e0b;
+    --accent-light: #fbbf24;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --success: #10b981;
 }
 
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    color: var(--dark);
+}
+
+.bg-amazon-secondary {
+    background: var(--dark);
+}
+
+.bg-amazon-primary {
+    background: var(--accent);
+}
+
+.text-amazon-primary {
+    color: var(--accent);
+}
+
+.text-amazon-blue {
+    color: var(--primary);
+}
+
+.hover\:bg-amazon-primary:hover {
+    background: var(--accent-light);
+}
+
+/* Modern Card Styles */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Button Styles */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+.btn-accent {
+    background: var(--accent);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+    background: var(--accent-light);
+    transform: translateY(-1px);
+}
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
