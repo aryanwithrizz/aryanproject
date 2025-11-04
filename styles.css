@@ -1,99 +1,387 @@
+// Sample product data
+const products = [
+    {
+        id: 1,
+        name: "Wireless Headphones",
+        price: 2499,
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        description: "Premium wireless headphones with noise cancellation and 30-hour battery life."
+    },
+    {
+        id: 2,
+        name: "Organic Apples",
+        price: 299,
+        category: "grocery",
+        image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+        description: "Fresh organic apples sourced directly from farmers."
+    },
+    {
+        id: 3,
+        name: "Men's Casual Shirt",
+        price: 1299,
+        category: "clothing",
+        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+        description: "Comfortable cotton shirt perfect for casual outings."
+    },
+    {
+        id: 4,
+        name: "Smartphone",
+        price: 18999,
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+        description: "Latest smartphone with high-performance camera and long-lasting battery."
+    },
+    {
+        id: 5,
+        name: "Coffee Beans",
+        price: 599,
+        category: "grocery",
+        image: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        description: "Premium arabica coffee beans for the perfect brew."
+    },
+    {
+        id: 6,
+        name: "Women's Dress",
+        price: 1999,
+        category: "clothing",
+        image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+        description: "Elegant dress suitable for parties and special occasions."
+    },
+    {
+        id: 7,
+        name: "Kitchen Blender",
+        price: 3499,
+        category: "home",
+        image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+        description: "Powerful blender for smoothies, soups, and more."
+    },
+    {
+        id: 8,
+        name: "Fitness Tracker",
+        price: 3999,
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+        description: "Track your steps, heart rate, and sleep with this advanced fitness tracker."
+    },
+    {
+        id: 9,
+        name: "Rice Bag",
+        price: 499,
+        category: "grocery",
+        image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        description: "Premium quality rice, perfect for daily meals."
+    },
+    {
+        id: 10,
+        name: "Jeans",
+        price: 1599,
+        category: "clothing",
+        image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80",
+        description: "Comfortable and stylish jeans for everyday wear."
+    },
+    {
+        id: 11,
+        name: "Laptop",
+        price: 54999,
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+        description: "High-performance laptop for work and entertainment."
+    },
+    {
+        id: 12,
+        name: "Cooking Oil",
+        price: 399,
+        category: "grocery",
+        image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1130&q=80",
+        description: "Healthy cooking oil for your daily cooking needs."
+    },
+    {
+        id: 13,
+        name: "T-Shirt",
+        price: 699,
+        category: "clothing",
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+        description: "Comfortable cotton t-shirt in various colors."
+    },
+    {
+        id: 14,
+        name: "Table Lamp",
+        price: 1299,
+        category: "home",
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        description: "Modern table lamp for your bedside or study table."
+    },
+    {
+        id: 15,
+        name: "Smart Watch",
+        price: 7999,
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+        description: "Feature-rich smartwatch with health monitoring."
+    },
+    {
+        id: 16,
+        name: "Milk",
+        price: 60,
+        category: "grocery",
+        image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
+        description: "Fresh milk, rich in nutrients."
+    },
+    {
+        id: 17,
+        name: "Jacket",
+        price: 2999,
+        category: "clothing",
+        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
+        description: "Warm and stylish jacket for cold weather."
+    },
+    {
+        id: 18,
+        name: "Pressure Cooker",
+        price: 1999,
+        category: "home",
+        image: "https://images.unsplash.com/photo-1581093458791-8a0a1edb6c78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        description: "Durable pressure cooker for fast cooking."
+    },
+    {
+        id: 19,
+        name: "Gaming Console",
+        price: 29999,
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        description: "Next-gen gaming console for immersive gaming experience."
+    },
+    {
+        id: 20,
+        name: "Bread",
+        price: 45,
+        category: "grocery",
+        image: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        description: "Freshly baked bread for your breakfast."
+    }
+];
 
-/* Modern Color Grading and Styles */
-:root {
-    --primary: #2563eb;
-    --primary-light: #3b82f6;
-    --secondary: #1e40af;
-    --accent: #f59e0b;
-    --accent-light: #fbbf24;
-    --dark: #1e293b;
-    --light: #f8fafc;
-    --success: #10b981;
+// DOM Elements
+const authPage = document.getElementById('auth-page');
+const welcomePage = document.getElementById('welcome-page');
+const homePage = document.getElementById('home-page');
+const productModal = document.getElementById('product-modal');
+const paymentModal = document.getElementById('payment-modal');
+const successModal = document.getElementById('success-modal');
+
+const authOptions = document.querySelectorAll('.auth-option');
+const authForms = document.querySelectorAll('.auth-form');
+const loginBtn = document.getElementById('login-btn');
+const signupBtn = document.getElementById('signup-btn');
+const startShoppingBtn = document.getElementById('start-shopping');
+const productsContainer = document.getElementById('products-container');
+const closeModalBtns = document.querySelectorAll('.close-modal');
+const confirmPaymentBtn = document.getElementById('confirm-payment');
+const continueShoppingBtn = document.getElementById('continue-shopping');
+const userName = document.getElementById('user-name');
+
+// Event Listeners
+authOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        const target = option.getAttribute('data-target');
+        
+        authOptions.forEach(opt => opt.classList.remove('active'));
+        authForms.forEach(form => form.classList.remove('active'));
+        
+        option.classList.add('active');
+        document.getElementById(target).classList.add('active');
+    });
+});
+
+loginBtn.addEventListener('click', () => {
+    const email = document.getElementById('login-email').value;
+    if (email) {
+        userName.textContent = email.split('@')[0];
+        authPage.classList.remove('active');
+        welcomePage.classList.add('active');
+    } else {
+        alert('Please enter your email');
+    }
+});
+
+signupBtn.addEventListener('click', () => {
+    const name = document.getElementById('signup-name').value;
+    const email = document.getElementById('signup-email').value;
+    if (name && email) {
+        userName.textContent = name;
+        authPage.classList.remove('active');
+        welcomePage.classList.add('active');
+    } else {
+        alert('Please fill all fields');
+    }
+});
+
+startShoppingBtn.addEventListener('click', () => {
+    welcomePage.classList.remove('active');
+    homePage.classList.add('active');
+    displayProducts();
+});
+
+closeModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        productModal.style.display = 'none';
+        paymentModal.style.display = 'none';
+        successModal.style.display = 'none';
+    });
+});
+
+confirmPaymentBtn.addEventListener('click', () => {
+    paymentModal.style.display = 'none';
+    successModal.style.display = 'block';
+});
+
+continueShoppingBtn.addEventListener('click', () => {
+    successModal.style.display = 'none';
+});
+
+// Display products on home page
+function displayProducts() {
+    productsContainer.innerHTML = '';
+    
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card fade-in';
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="product-img">
+            <div class="product-info">
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">₹${product.price}</div>
+                <div class="product-actions">
+                    <button class="action-btn cart-btn" data-id="${product.id}">Add to Cart</button>
+                    <button class="action-btn buy-btn" data-id="${product.id}">Buy Now</button>
+                </div>
+            </div>
+        `;
+        
+        productsContainer.appendChild(productCard);
+        
+        // Add event listeners to product buttons
+        const cartBtn = productCard.querySelector('.cart-btn');
+        const buyBtn = productCard.querySelector('.buy-btn');
+        
+        cartBtn.addEventListener('click', () => {
+            alert(`${product.name} added to cart!`);
+        });
+        
+        buyBtn.addEventListener('click', () => {
+            showProductDetails(product.id);
+            paymentModal.style.display = 'block';
+        });
+        
+        // Show product details when image or name is clicked
+        const productImg = productCard.querySelector('.product-img');
+        const productName = productCard.querySelector('.product-name');
+        
+        productImg.addEventListener('click', () => showProductDetails(product.id));
+        productName.addEventListener('click', () => showProductDetails(product.id));
+    });
 }
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    color: var(--dark);
+// Show product details in modal
+function showProductDetails(productId) {
+    const product = products.find(p => p.id === productId);
+    
+    if (product) {
+        document.getElementById('detail-img').src = product.image;
+        document.getElementById('detail-name').textContent = product.name;
+        document.getElementById('detail-price').textContent = `₹${product.price}`;
+        document.getElementById('detail-desc').textContent = product.description;
+        
+        productModal.style.display = 'block';
+        
+        // Add event listeners to modal buttons
+        const modalCartBtn = document.querySelector('.detail-cart-btn');
+        const modalBuyBtn = document.querySelector('.detail-buy-btn');
+        
+        modalCartBtn.onclick = () => {
+            alert(`${product.name} added to cart!`);
+        };
+        
+        modalBuyBtn.onclick = () => {
+            productModal.style.display = 'none';
+            paymentModal.style.display = 'block';
+        };
+    }
 }
 
-.bg-amazon-secondary {
-    background: var(--dark);
+// Category filtering
+const categoryCards = document.querySelectorAll('.category-card');
+categoryCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const category = card.getAttribute('data-category');
+        filterProductsByCategory(category);
+    });
+});
+
+function filterProductsByCategory(category) {
+    const filteredProducts = products.filter(product => product.category === category);
+    
+    productsContainer.innerHTML = '';
+    
+    if (filteredProducts.length === 0) {
+        productsContainer.innerHTML = '<p class="no-products">No products found in this category.</p>';
+        return;
+    }
+    
+    filteredProducts.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card fade-in';
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="product-img">
+            <div class="product-info">
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">₹${product.price}</div>
+                <div class="product-actions">
+                    <button class="action-btn cart-btn" data-id="${product.id}">Add to Cart</button>
+                    <button class="action-btn buy-btn" data-id="${product.id}">Buy Now</button>
+                </div>
+            </div>
+        `;
+        
+        productsContainer.appendChild(productCard);
+        
+        // Add event listeners to product buttons
+        const cartBtn = productCard.querySelector('.cart-btn');
+        const buyBtn = productCard.querySelector('.buy-btn');
+        
+        cartBtn.addEventListener('click', () => {
+            alert(`${product.name} added to cart!`);
+        });
+        
+        buyBtn.addEventListener('click', () => {
+            showProductDetails(product.id);
+            paymentModal.style.display = 'block';
+        });
+        
+        // Show product details when image or name is clicked
+        const productImg = productCard.querySelector('.product-img');
+        const productName = productCard.querySelector('.product-name');
+        
+        productImg.addEventListener('click', () => showProductDetails(product.id));
+        productName.addEventListener('click', () => showProductDetails(product.id));
+    });
 }
 
-.bg-amazon-primary {
-    background: var(--accent);
-}
+// Payment method selection
+const paymentMethods = document.querySelectorAll('.payment-method');
+paymentMethods.forEach(method => {
+    method.addEventListener('click', () => {
+        paymentMethods.forEach(m => m.classList.remove('active'));
+        method.classList.add('active');
+    });
+});
 
-.text-amazon-primary {
-    color: var(--accent);
-}
-
-.text-amazon-blue {
-    color: var(--primary);
-}
-
-.hover\:bg-amazon-primary:hover {
-    background: var(--accent-light);
-}
-
-/* Modern Card Styles */
-.card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-/* Button Styles */
-.btn-primary {
-    background: var(--primary);
-    color: white;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background: var(--primary-light);
-    transform: translateY(-1px);
-}
-
-.btn-accent {
-    background: var(--accent);
-    color: white;
-    transition: all 0.3s ease;
-}
-
-.btn-accent:hover {
-    background: var(--accent-light);
-    transform: translateY(-1px);
-}
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #FF9900;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #e68a00;
-}
+// Initialize the app
+document.addEventListener('DOMContentLoaded', () => {
+    // Add some animation to elements
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.1}s`;
+    });
+});
