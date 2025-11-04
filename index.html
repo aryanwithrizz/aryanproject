@@ -3,381 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan's Mega Bazaar</title>
-<link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        amazon: {
-                            primary: '#FF9900',
-                            secondary: '#131921',
-                            light: '#232F3E',
-                            blue: '#146EB4'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Aryan's Market</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-100">
-    <!-- Navigation -->
-    <nav class="bg-amazon-secondary text-white">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                    <a href="#" class="text-2xl font-bold text-amazon-primary">Aryan's Mega Bazaar</a>
-<div class="hidden md:flex items-center bg-amazon-light rounded-md overflow-hidden">
-                    <select class="bg-gray-100 text-black px-2 py-1 text-sm">
-                        <option>All</option>
-                        <option>Electronics</option>
-                        <option>Fashion</option>
-                    </select>
-                    <input type="text" class="px-4 py-1 w-96 focus:outline-none text-black">
-                    <button class="bg-amazon-primary px-4 py-1">
-                        <i data-feather="search"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="flex items-center space-x-6">
-                <a href="#" class="flex flex-col items-center text-sm">
-                    <span>Hello, Sign in</span>
-                    <span class="font-bold">Account & Lists</span>
-                </a>
-                <a href="#" class="flex flex-col items-center text-sm">
-                    <span>Returns</span>
-                    <span class="font-bold">& Orders</span>
-                </a>
-                <a href="#" class="flex items-center">
-                    <i data-feather="shopping-cart" class="mr-1"></i>
-                    <span class="font-bold">Cart</span>
-                </a>
-            </div>
-        </div>
-        <div class="bg-amazon-light px-4 py-2 flex items-center space-x-6 text-sm">
-            <a href="#" class="flex items-center">
-                <i data-feather="menu" class="mr-1"></i>
-                <span>All</span>
-            </a>
-            <a href="#">Today's Deals</a>
-            <a href="#">Customer Service</a>
-            <a href="#">Gift Cards</a>
-            <a href="#">Sell</a>
-        </div>
-    </nav>
-
-    <!-- Hero Banner -->
-    <div class="bg-amazon-light text-white">
-        <div class="container mx-auto px-4 py-8">
-            <div class="relative h-64 bg-gradient-to-r from-amazon-secondary to-amazon-primary rounded-lg overflow-hidden">
-                <div class="absolute inset-0 flex items-center px-12">
-                    <div class="max-w-md">
-                        <h1 class="text-3xl font-bold mb-2">Welcome to Aryan's Mega Bazaar</h1>
-<p class="mb-4">Shop millions of products with fast delivery</p>
-                        <button class="bg-amazon-primary text-black px-6 py-2 rounded-md font-bold">Shop Now</button>
+<body>
+    <!-- Login/Signup Page -->
+    <div id="auth-page" class="page active">
+        <div class="auth-container">
+            <div class="auth-background"></div>
+            <div class="auth-card fade-in">
+                <div class="logo">Aryan's Market</div>
+                <div class="tagline">Your one-stop destination for all shopping needs</div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value">1M+</div>
+                        <div class="stat-label">Daily Users</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">100K+</div>
+                        <div class="stat-label">Daily Orders</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4.8★</div>
+                        <div class="stat-label">Rating</div>
                     </div>
                 </div>
-                <img src="http://static.photos/technology/1200x630/1" alt="Amazon Banner" class="w-full h-full object-cover">
+                
+                <div class="auth-options">
+                    <div class="auth-option active" data-target="login-form">Login</div>
+                    <div class="auth-option" data-target="signup-form">Sign Up</div>
+                </div>
+                
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password">
+                    </div>
+                    <button type="button" class="submit-btn" id="login-btn">Login</button>
+                </form>
+                
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password">
+                    </div>
+                    <button type="button" class="submit-btn" id="signup-btn">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Welcome Page -->
+    <div id="welcome-page" class="page">
+        <div class="welcome-container">
+            <h1 class="welcome-title">Welcome, <span id="user-name">Aryan</span>!</h1>
+            <p class="welcome-subtitle">Let's start our shopping journey</p>
+            <button class="start-btn" id="start-shopping">Let's Go!</button>
+        </div>
+    </div>
+    
+    <!-- Home Page -->
+    <div id="home-page" class="page">
+        <div class="header">
+            <div class="site-name">Aryan's Market</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <div class="user-actions">
+                <i class="fas fa-shopping-cart user-action" id="cart-icon"></i>
+                <i class="fas fa-user user-action" id="profile-icon"></i>
+            </div>
+        </div>
+        
+        <div class="categories">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="electronics">
+                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Electronics" class="category-img">
+                    <div class="category-name">Electronics</div>
+                </div>
+                <div class="category-card" data-category="grocery">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Grocery" class="category-img">
+                    <div class="category-name">Grocery</div>
+                </div>
+                <div class="category-card" data-category="clothing">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Clothing" class="category-img">
+                    <div class="category-name">Clothing</div>
+                </div>
+                <div class="category-card" data-category="home">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=958&q=80" alt="Home & Kitchen" class="category-img">
+                    <div class="category-name">Home & Kitchen</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="products">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid" id="products-container">
+                <!-- Products will be dynamically added here -->
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
             </div>
         </div>
     </div>
-
-    <!-- Product Categories -->
-    <div class="container mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6">Shop by Category</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="h-32 mb-2">
-                    <img src="http://static.photos/electronics/320x240/1" alt="Electronics" class="w-full h-full object-contain">
+    
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="product-detail">
+                <div class="product-detail-img">
+                    <img id="detail-img" src="" alt="Product Image">
                 </div>
-                <p class="text-center font-medium">Electronics</p>
-            </a>
-            <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="h-32 mb-2">
-                    <img src="http://static.photos/fashion/320x240/1" alt="Fashion" class="w-full h-full object-contain">
-                </div>
-                <p class="text-center font-medium">Fashion</p>
-            </a>
-            <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="h-32 mb-2">
-                    <img src="http://static.photos/home/320x240/1" alt="Home" class="w-full h-full object-contain">
-                </div>
-                <p class="text-center font-medium">Home</p>
-            </a>
-            <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="h-32 mb-2">
-                    <img src="http://static.photos/beauty/320x240/1" alt="Beauty" class="w-full h-full object-contain">
-                </div>
-                <p class="text-center font-medium">Beauty</p>
-            </a>
-            <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="h-32 mb-2">
-                    <img src="http://static.photos/toys/320x240/1" alt="Toys" class="w-full h-full object-contain">
-                </div>
-                <p class="text-center font-medium">Toys</p>
-            </a>
-            <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="h-32 mb-2">
-                    <img src="http://static.photos/grocery/320x240/1" alt="Grocery" class="w-full h-full object-contain">
-                </div>
-                <p class="text-center font-medium">Grocery</p>
-            </a>
-        </div>
-    </div>
-
-    <!-- Deals Section -->
-    <div class="bg-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">Today's Deals</h2>
-                <a href="#" class="text-amazon-blue font-medium">See all deals</a>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="h-40 bg-gray-100">
-                        <img src="http://static.photos/electronics/320x240/2" alt="Deal" class="w-full h-full object-contain">
-                    </div>
-                    <div class="p-3">
-                        <div class="flex items-center mb-1">
-                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">50% off</span>
-                        </div>
-                        <p class="text-sm font-medium line-clamp-2">Wireless Headphones with Noise Cancellation</p>
-                        <p class="text-amazon-primary font-bold mt-1">₹1,999</p>
-                        <p class="text-gray-500 text-xs line-through">₹3,999</p>
-                    </div>
-                </div>
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="h-40 bg-gray-100">
-                        <img src="http://static.photos/fashion/320x240/2" alt="Deal" class="w-full h-full object-contain">
-                    </div>
-                    <div class="p-3">
-                        <div class="flex items-center mb-1">
-                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">60% off</span>
-                        </div>
-                        <p class="text-sm font-medium line-clamp-2">Men's Casual T-Shirt Pack of 3</p>
-                        <p class="text-amazon-primary font-bold mt-1">₹499</p>
-                        <p class="text-gray-500 text-xs line-through">₹1,299</p>
-                    </div>
-                </div>
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="h-40 bg-gray-100">
-                        <img src="http://static.photos/home/320x240/2" alt="Deal" class="w-full h-full object-contain">
-                    </div>
-                    <div class="p-3">
-                        <div class="flex items-center mb-1">
-                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">40% off</span>
-                        </div>
-                        <p class="text-sm font-medium line-clamp-2">Non-Stick Cookware Set 5 Pieces</p>
-                        <p class="text-amazon-primary font-bold mt-1">₹1,299</p>
-                        <p class="text-gray-500 text-xs line-through">₹2,199</p>
-                    </div>
-                </div>
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="h-40 bg-gray-100">
-                        <img src="http://static.photos/electronics/320x240/3" alt="Deal" class="w-full h-full object-contain">
-                    </div>
-                    <div class="p-3">
-                        <div class="flex items-center mb-1">
-                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">30% off</span>
-                        </div>
-                        <p class="text-sm font-medium line-clamp-2">Smart Watch with Fitness Tracker</p>
-                        <p class="text-amazon-primary font-bold mt-1">₹2,499</p>
-                        <p class="text-gray-500 text-xs line-through">₹3,599</p>
-                    </div>
-                </div>
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="h-40 bg-gray-100">
-                        <img src="http://static.photos/toys/320x240/2" alt="Deal" class="w-full h-full object-contain">
-                    </div>
-                    <div class="p-3">
-                        <div class="flex items-center mb-1">
-                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">55% off</span>
-                        </div>
-                        <p class="text-sm font-medium line-clamp-2">Building Blocks Set for Kids (200 Pieces)</p>
-                        <p class="text-amazon-primary font-bold mt-1">₹799</p>
-                        <p class="text-gray-500 text-xs line-through">₹1,799</p>
-                    </div>
-                </div>
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="h-40 bg-gray-100">
-                        <img src="http://static.photos/beauty/320x240/2" alt="Deal" class="w-full h-full object-contain">
-                    </div>
-                    <div class="p-3">
-                        <div class="flex items-center mb-1">
-                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">25% off</span>
-                        </div>
-                        <p class="text-sm font-medium line-clamp-2">Skincare Gift Set with 5 Products</p>
-                        <p class="text-amazon-primary font-bold mt-1">₹1,199</p>
-                        <p class="text-gray-500 text-xs line-through">₹1,599</p>
+                <div class="product-detail-info">
+                    <h2 id="detail-name" class="product-detail-name"></h2>
+                    <div id="detail-price" class="product-detail-price"></div>
+                    <p id="detail-desc" class="product-detail-desc"></p>
+                    <div class="product-detail-actions">
+                        <button class="detail-action-btn detail-cart-btn">Add to Cart</button>
+                        <button class="detail-action-btn detail-buy-btn">Buy Now</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-amazon-secondary text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="font-bold mb-4">Get to Know Us</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Press Releases</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold mb-4">Make Money with Us</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white">Sell products on Amazon</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Become an Affiliate</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Advertise Your Products</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold mb-4">Payment Products</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white">Amazon Business Card</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Shop with Points</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Reload Your Balance</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold mb-4">Let Us Help You</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white">Your Account</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Your Orders</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Shipping Rates & Policies</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-600 pt-6">
-                <div class="flex justify-center mb-4">
-                    <a href="#" class="text-2xl font-bold text-amazon-primary">Aryan's Mega Bazaar</a>
-</div>
-                <p class="text-center text-gray-300 text-sm">© 2023, Aryan's Mega Bazaar. All rights reserved.</p>
-</div>
-        </div>
-    </footer>
-    <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-lg w-96">
-            <h3 class="text-2xl font-bold mb-6 text-center">Login / Sign Up</h3>
-            <form id="loginForm">
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2">Email</label>
-                    <input type="email" class="w-full px-4 py-2 border rounded" required>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2">Password</label>
-                    <input type="password" class="w-full px-4 py-2 border rounded" required>
-                </div>
-                <button type="submit" class="w-full bg-amazon-primary text-black py-2 rounded font-bold mb-4">Continue</button>
-                <p class="text-sm text-center">New to Aryan's Mega Bazaar? <a href="#" class="text-amazon-blue">Create account</a></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Cart Modal -->
-    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold">Your Cart</h3>
-                <button onclick="toggleCart()" class="text-gray-500 hover:text-black">
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div id="cartItems" class="mb-6">
-                <!-- Cart items will be dynamically inserted here -->
-            </div>
-            <div class="border-t pt-4">
-                <div class="flex justify-between mb-4">
-                    <span class="font-bold">Subtotal:</span>
-                    <span id="cartSubtotal" class="font-bold">₹0</span>
-                </div>
-                <button onclick="proceedToCheckout()" class="w-full bg-amazon-primary text-black py-2 rounded font-bold">Proceed to Buy</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Checkout Modal -->
-    <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold">Checkout</h3>
-                <button onclick="toggleCheckout()" class="text-gray-500 hover:text-black">
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="md:col-span-2">
-                    <div class="bg-gray-50 p-4 rounded mb-4">
-                        <h4 class="font-bold mb-2">Delivery Address</h4>
-                        <div class="space-y-2">
-                            <input type="text" placeholder="Full Name" class="w-full p-2 border rounded">
-                            <input type="text" placeholder="Mobile Number" class="w-full p-2 border rounded">
-                            <textarea placeholder="Full Address" class="w-full p-2 border rounded"></textarea>
-                        </div>
+    
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal payment-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="payment-form">
+                <h2 class="section-title">Complete Your Purchase</h2>
+                <div class="payment-methods">
+                    <div class="payment-method active">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>UPI</div>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded">
-                        <h4 class="font-bold mb-2">Payment Method</h4>
-                        <div class="space-y-2">
-                            <label class="flex items-center space-x-2">
-                                <input type="radio" name="payment" checked>
-                                <span>UPI (aryanwithrizz@ybl)</span>
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="radio" name="payment">
-                                <span>Cash on Delivery</span>
-                            </label>
-                        </div>
+                    <div class="payment-method">
+                        <i class="fas fa-credit-card"></i>
+                        <div>Card</div>
+                    </div>
+                    <div class="payment-method">
+                        <i class="fas fa-wallet"></i>
+                        <div>Wallet</div>
                     </div>
                 </div>
-                <div>
-                    <div class="bg-gray-50 p-4 rounded">
-                        <h4 class="font-bold mb-2">Order Summary</h4>
-                        <div id="checkoutItems" class="mb-4">
-                            <!-- Order items will be dynamically inserted here -->
-                        </div>
-                        <div class="space-y-2 border-t pt-2">
-                            <div class="flex justify-between">
-                                <span>Subtotal:</span>
-                                <span id="checkoutSubtotal">₹0</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Delivery:</span>
-                                <span>FREE</span>
-                            </div>
-                            <div class="flex justify-between font-bold">
-                                <span>Total:</span>
-                                <span id="checkoutTotal">₹0</span>
-                            </div>
-                        </div>
-                        <button onclick="placeOrder()" class="w-full bg-amazon-primary text-black py-2 rounded font-bold mt-4">Place Order</button>
-                    </div>
+                
+                <div class="upi-id">
+                    Send payment to: aryan.market@upi
                 </div>
+                
+                <button class="submit-btn" id="confirm-payment">Confirm Payment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Payment Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="payment-success">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="section-title">Order Placed Successfully!</h2>
+                <p>Your order has been confirmed and will be delivered soon.</p>
+                <button class="start-btn" id="continue-shopping">Continue Shopping</button>
             </div>
         </div>
     </div>
 
-    <!-- Order Confirmation Modal -->
-    <div id="orderConfirmation" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-lg w-96 text-center">
-            <div class="text-green-500 mb-4">
-                <i data-feather="check-circle" class="w-16 h-16 mx-auto"></i>
-            </div>
-            <h3 class="text-2xl font-bold mb-2">Order Placed Successfully!</h3>
-            <p class="mb-4">Your order #<span id="orderNumber"></span> has been confirmed.</p>
-            <p class="mb-6">Payment received to aryanwithrizz@ybl</p>
-            <button onclick="closeOrderConfirmation()" class="w-full bg-amazon-primary text-black py-2 rounded font-bold">Continue Shopping</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <script>feather.replace();</script>
-    </html>
+    <script src="scripts.js"></script>
+</body>
+</html>
