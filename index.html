@@ -3,763 +3,896 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan's Market - Shop Everything You Love</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Aryan's Market - Premium Shopping Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --purple-primary: #8B5CF6;
+            --purple-dark: #6D28D9;
+            --purple-light: #A78BFA;
+            --green-success: #10B981;
+            --red-error: #EF4444;
+            --dark-bg: #0F0F0F;
+            --dark-card: #1A1A1A;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: #fff;
             overflow-x: hidden;
-            background: #000;
         }
 
-        /* ========== HIDE ALL SECTIONS BY DEFAULT ========== */
-        .page {
-            display: none;
-            min-height: 100vh;
-            width: 100%;
-        }
+        /* ==================== UTILITY CLASSES ==================== */
+        .hidden { display: none !important; }
+        .flex { display: flex; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .flex-between { display: flex; align-items: center; justify-content: space-between; }
 
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== LOGIN PAGE ========== */
-        #loginPage {
-            background: linear-gradient(135deg, #0f0f0f 50%, #6b46c1 50%);
-            position: relative;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ==================== LOGIN SCREEN ==================== */
+        #authScreen {
+            min-height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, #000 0%, #1a0033 100%);
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            position: relative;
             overflow: hidden;
         }
 
-        #loginPage::before {
+        #authScreen::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(100px);
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 92, 246, 0.03) 2px, rgba(139, 92, 246, 0.03) 4px);
+            animation: scan 8s linear infinite;
         }
 
-        .login-wrapper {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 20px;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .brand-logo {
-            font-size: 56px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #a78bfa, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .brand-tagline {
-            color: rgba(255,255,255,0.9);
-            font-size: 20px;
-            margin-bottom: 50px;
-            font-weight: 300;
-        }
-
-        .stats-row {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(167, 139, 250, 0.3);
-            padding: 25px 40px;
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            border-color: #a78bfa;
-            box-shadow: 0 20px 40px rgba(167, 139, 250, 0.3);
-        }
-
-        .stat-number {
-            font-size: 42px;
-            font-weight: 700;
-            color: #a78bfa;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            color: rgba(255,255,255,0.8);
-            font-size: 15px;
-            font-weight: 300;
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
         }
 
         .auth-container {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .auth-card {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(30px);
-            border: 2px solid rgba(255,255,255,0.1);
-            border-radius: 25px;
-            padding: 50px 40px;
-            width: 400px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-
-        .auth-title {
-            font-size: 32px;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 30px;
-        }
-
-        .input-field {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
             width: 100%;
-            padding: 18px 20px;
-            margin-bottom: 20px;
-            border: 2px solid rgba(255,255,255,0.1);
+            animation: slideUp 0.6s ease;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .auth-logo {
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, var(--purple-light) 50%, #EC4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+            animation: pulse 3s ease infinite;
+        }
+
+        .auth-tagline {
+            font-size: 18px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 400;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple-primary);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--purple-light);
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .auth-forms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .auth-box {
             background: rgba(255,255,255,0.05);
-            border-radius: 15px;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 40px 32px;
+            transition: all 0.3s ease;
+        }
+
+        .auth-box:hover {
+            border-color: var(--purple-primary);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .auth-box-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--purple-primary);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-dark) 100%);
+            border: none;
+            border-radius: 12px;
             color: #fff;
             font-size: 16px;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #a78bfa;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .input-field::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #6b46c1, #a78bfa);
-            border: none;
-            border-radius: 15px;
-            color: #fff;
-            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(107, 70, 193, 0.4);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
         }
 
-        /* ========== WELCOME PAGE ========== */
-        #welcomePage {
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* ==================== WELCOME SCREEN ==================== */
+        #welcomeScreen {
+            min-height: 100vh;
             background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            text-align: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #welcomeScreen::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            animation: scaleIn 0.5s ease;
+        }
+
+        .welcome-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s ease infinite;
         }
 
         .welcome-title {
-            font-size: 64px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #a78bfa);
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, var(--purple-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
         }
 
         .welcome-subtitle {
-            font-size: 28px;
-            color: rgba(255,255,255,0.8);
+            font-size: 24px;
+            color: rgba(255,255,255,0.6);
             margin-bottom: 50px;
             font-weight: 300;
         }
 
-        .continue-btn {
-            padding: 25px 70px;
-            background: #10b981;
+        .btn-success {
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--green-success) 0%, #059669 100%);
             border: none;
-            border-radius: 20px;
+            border-radius: 16px;
             color: #fff;
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3);
         }
 
-        .continue-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.5);
+        .btn-success:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.4);
         }
 
-        /* ========== HOME PAGE ========== */
-        #homePage {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
-            min-height: 100vh;
-            padding-bottom: 100px;
-        }
-
-        .navbar {
-            background: rgba(107, 70, 193, 0.95);
+        /* ==================== MAIN APP ==================== */
+        .app-header {
+            background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(20px);
-            padding: 20px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+            padding: 16px 24px;
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 24px;
         }
 
-        .nav-brand {
-            font-size: 28px;
-            font-weight: 700;
-            color: #fff;
+        .app-logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple-primary) 0%, #EC4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
         }
 
-        .search-box {
+        .search-container {
             flex: 1;
             max-width: 600px;
-            margin: 0 30px;
             position: relative;
         }
 
-        .search-input {
+        .search-input-main {
             width: 100%;
-            padding: 15px 50px 15px 20px;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            background: rgba(255,255,255,0.95);
+            padding: 12px 48px 12px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
         }
 
-        .search-input:focus {
-            outline: none;
-            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+        .search-input-main:focus {
+            border-color: var(--purple-primary);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
         }
 
         .search-icon {
             position: absolute;
-            right: 20px;
+            right: 16px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 20px;
-            color: #666;
+            opacity: 0.4;
         }
 
-        .main-content {
-            padding: 40px;
+        .user-profile-btn {
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple-primary);
+            border-radius: 10px;
+            color: var(--purple-light);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .user-profile-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        .main-container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 32px 24px 100px 24px;
         }
 
-        .section-header {
-            color: #fff;
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 30px;
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
             margin-top: 40px;
         }
 
-        .categories-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+        .section-title:first-child {
+            margin-top: 0;
         }
 
-        .category-item {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(167, 139, 250, 0.2);
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.4s;
+        /* ==================== CATEGORIES ==================== */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
             position: relative;
-        }
-
-        .category-item:hover {
-            transform: translateY(-15px);
-            border-color: #a78bfa;
-            box-shadow: 0 25px 50px rgba(167, 139, 250, 0.4);
-        }
-
-        .category-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .category-name {
-            padding: 20px;
-            text-align: center;
-            color: #fff;
-            font-size: 22px;
-            font-weight: 600;
-            background: rgba(0,0,0,0.5);
-        }
-
-        .products-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product-item {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(167, 139, 250, 0.2);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 180px;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .category-card:hover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid var(--purple-primary);
+            border-radius: 20px;
+            z-index: 3;
+        }
+
+        .category-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover .category-bg {
+            transform: scale(1.1);
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 4;
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* ==================== PRODUCTS GRID ==================== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
 
-        .product-item:hover {
-            transform: translateY(-10px);
-            border-color: #a78bfa;
-            box-shadow: 0 20px 40px rgba(167, 139, 250, 0.3);
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--purple-primary);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
         }
 
-        .product-image {
+        .product-image-container {
+            position: relative;
             width: 100%;
-            height: 250px;
-            object-fit: cover;
+            height: 240px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
         }
 
-        .product-details {
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.08);
+        }
+
+        .product-info {
             padding: 20px;
         }
 
-        .product-title {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 500;
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
             margin-bottom: 12px;
-            height: 50px;
+            color: #fff;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
+            min-height: 48px;
         }
 
         .product-price {
-            color: #10b981;
             font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-weight: 800;
+            color: var(--green-success);
+            margin-bottom: 16px;
         }
 
-        .product-actions {
+        .product-buttons {
             display: flex;
             gap: 10px;
         }
 
-        .btn-cart, .btn-buy {
+        .btn-add-cart, .btn-buy-now {
             flex: 1;
             padding: 12px;
             border: none;
-            border-radius: 12px;
-            font-weight: 600;
+            border-radius: 10px;
             font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .btn-cart {
-            background: #6b46c1;
+        .btn-add-cart {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple-light);
+            border: 1px solid var(--purple-primary);
+        }
+
+        .btn-add-cart:hover {
+            background: var(--purple-primary);
+            color: #fff;
+            transform: scale(1.02);
+        }
+
+        .btn-buy-now {
+            background: var(--green-success);
             color: #fff;
         }
 
-        .btn-cart:hover {
-            background: #7c3aed;
-            transform: scale(1.05);
-        }
-
-        .btn-buy {
-            background: #10b981;
-            color: #fff;
-        }
-
-        .btn-buy:hover {
+        .btn-buy-now:hover {
             background: #059669;
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
-        /* ========== BOTTOM NAVIGATION ========== */
-        .bottom-bar {
+        /* ==================== BOTTOM NAV ==================== */
+        .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
-            background: rgba(107, 70, 193, 0.95);
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
             display: flex;
             justify-content: space-around;
-            padding: 15px 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
-            z-index: 1000;
+            padding: 12px 0;
+            z-index: 100;
         }
 
-        .nav-item {
+        .nav-btn {
             background: none;
             border: none;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.5);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            padding: 10px 20px;
+            padding: 8px 24px;
+            transition: all 0.3s ease;
             position: relative;
         }
 
-        .nav-item:hover {
-            color: #fff;
-            transform: translateY(-5px);
+        .nav-btn.active {
+            color: var(--purple-primary);
         }
 
-        .nav-item.active {
-            color: #fff;
+        .nav-btn:hover {
+            color: var(--purple-light);
+            transform: translateY(-2px);
         }
 
-        .nav-icon-text {
+        .nav-icon {
             font-size: 24px;
         }
 
-        .nav-label {
+        .nav-text {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        .badge {
+        .cart-count {
             position: absolute;
-            top: 5px;
-            right: 10px;
-            background: #ef4444;
+            top: 4px;
+            right: 16px;
+            background: var(--red-error);
             color: #fff;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
+            padding: 0 6px;
         }
 
-        /* ========== CART PAGE ========== */
-        #cartPage {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
-            min-height: 100vh;
-            padding-bottom: 100px;
+        /* ==================== CART SCREEN ==================== */
+        .cart-list {
+            margin-bottom: 24px;
         }
 
-        .cart-content {
-            padding: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .cart-item-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(167, 139, 250, 0.2);
-            border-radius: 20px;
+        .cart-item {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             display: flex;
             gap: 20px;
             align-items: center;
+            transition: all 0.3s ease;
         }
 
-        .cart-item-image {
-            width: 120px;
-            height: 120px;
+        .cart-item:hover {
+            border-color: var(--purple-primary);
+        }
+
+        .cart-item-img {
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 15px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
         }
 
-        .cart-item-info {
+        .cart-item-details {
             flex: 1;
-            color: #fff;
         }
 
-        .cart-item-title {
-            font-size: 20px;
+        .cart-item-name {
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-qty {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
         }
 
         .cart-item-price {
-            font-size: 24px;
-            color: #10b981;
+            font-size: 22px;
             font-weight: 700;
+            color: var(--green-success);
         }
 
         .btn-remove {
-            background: #ef4444;
-            color: #fff;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 12px;
-            cursor: pointer;
+            padding: 10px 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--red-error);
+            border-radius: 10px;
+            color: var(--red-error);
             font-weight: 600;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .btn-remove:hover {
-            background: #dc2626;
-            transform: scale(1.05);
-        }
-
-        .cart-summary {
-            background: rgba(107, 70, 193, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: right;
+            background: var(--red-error);
             color: #fff;
         }
 
-        .total-label {
-            font-size: 22px;
-            margin-bottom: 10px;
+        .cart-total-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(109, 40, 217, 0.15) 100%);
+            border: 1px solid var(--purple-primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            text-align: right;
         }
 
-        .total-amount {
+        .cart-total-label {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+        }
+
+        .cart-total-amount {
             font-size: 42px;
-            font-weight: 700;
-            color: #10b981;
+            font-weight: 900;
+            color: #fff;
         }
 
         .btn-checkout {
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(135deg, #10b981, #059669);
+            padding: 18px;
+            background: linear-gradient(135deg, var(--green-success) 0%, #059669 100%);
             border: none;
-            border-radius: 20px;
+            border-radius: 14px;
             color: #fff;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
         }
 
         .btn-checkout:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
         }
 
-        .empty-cart {
+        .empty-state {
             text-align: center;
-            padding: 100px 20px;
-            color: rgba(255,255,255,0.6);
+            padding: 80px 20px;
         }
 
         .empty-icon {
             font-size: 100px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            opacity: 0.3;
         }
 
         .empty-text {
-            font-size: 24px;
+            font-size: 20px;
+            color: rgba(255,255,255,0.4);
         }
 
-        /* ========== PAYMENT PAGE ========== */
-        #paymentPage {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .payment-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(167, 139, 250, 0.3);
-            border-radius: 30px;
-            padding: 50px;
-            max-width: 600px;
-            width: 100%;
+        /* ==================== PAYMENT SCREEN ==================== */
+        .payment-container {
+            max-width: 500px;
+            margin: 80px auto;
+            background: var(--dark-card);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            padding: 40px;
             text-align: center;
-            color: #fff;
         }
 
         .payment-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 30px;
-        }
-
-        .upi-box {
-            background: rgba(107, 70, 193, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-
-        .upi-label {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .upi-id {
             font-size: 32px;
             font-weight: 700;
-            color: #10b981;
-            margin-bottom: 20px;
+            margin-bottom: 32px;
         }
 
-        .amount-display {
-            font-size: 48px;
+        .payment-upi-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(109, 40, 217, 0.15) 100%);
+            border: 1px solid var(--purple-primary);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .payment-upi-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .payment-upi-id {
+            font-size: 28px;
             font-weight: 700;
-            color: #fff;
-            margin: 20px 0;
+            color: var(--green-success);
+            margin-bottom: 24px;
         }
 
-        .btn-confirm {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            border: none;
-            border-radius: 20px;
+        .payment-amount {
+            font-size: 48px;
+            font-weight: 900;
             color: #fff;
-            font-size: 20px;
+        }
+
+        .payment-instruction {
+            font-size: 15px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 32px;
+        }
+
+        .btn-confirm-payment {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--green-success) 0%, #059669 100%);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
         }
 
-        .btn-confirm:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+        .btn-confirm-payment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
         }
 
-        .btn-back {
+        .btn-cancel {
             width: 100%;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 15px;
-            color: #fff;
+            padding: 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: rgba(255,255,255,0.7);
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .btn-back:hover {
-            background: rgba(255,255,255,0.2);
+        .btn-cancel:hover {
+            background: rgba(255,255,255,0.08);
         }
 
-        /* ========== SUCCESS PAGE ========== */
-        #successPage {
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+        /* ==================== SUCCESS SCREEN ==================== */
+        .success-container {
             text-align: center;
-            padding: 20px;
+            padding: 80px 20px;
         }
 
-        .success-icon-big {
+        .success-icon {
             font-size: 120px;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
+            animation: scaleIn 0.5s ease;
         }
 
         .success-title {
-            font-size: 48px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 20px;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
         }
 
         .success-message {
-            font-size: 22px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 30px;
+            font-size: 18px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
         }
 
-        .order-id-box {
-            background: rgba(107, 70, 193, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px 40px;
-            margin-bottom: 40px;
-            color: #fff;
-        }
-
-        .order-id-label {
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: rgba(255,255,255,0.7);
-        }
-
-        .order-id-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #10b981;
-        }
-
-        /* ========== ADMIN PAGE ========== */
-        #adminPage {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
-            min-height: 100vh;
+        .success-order-id {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--purple-primary);
+            border-radius: 12px;
             padding: 20px;
-            color: #fff;
+            margin-bottom: 40px;
+            display: inline-block;
         }
 
-        .admin-header {
-            background: rgba(107, 70, 193, 0.5);
-            backdrop-filter: blur(10px);
+        .success-order-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .success-order-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--green-success);
+        }
+
+        /* ==================== ADMIN PANEL ==================== */
+        .admin-header-bar {
+            background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-dark) 100%);
+            padding: 32px 40px;
             border-radius: 20px;
-            padding: 30px;
             margin-bottom: 40px;
             display: flex;
             justify-content: space-between;
@@ -768,548 +901,593 @@
 
         .admin-title {
             font-size: 36px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .btn-logout {
-            background: #ef4444;
+            padding: 12px 28px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
             color: #fff;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .btn-logout:hover {
-            background: #dc2626;
-            transform: scale(1.05);
+            background: var(--red-error);
+            border-color: var(--red-error);
         }
 
-        .stats-grid {
+        .admin-stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            gap: 24px;
             margin-bottom: 40px;
         }
 
-        .stat-box-admin {
-            background: rgba(107, 70, 193, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 35px;
+        .admin-stat-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 32px;
             text-align: center;
-            border: 2px solid rgba(167, 139, 250, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .stat-value {
+        .admin-stat-card:hover {
+            border-color: var(--purple-primary);
+            transform: translateY(-4px);
+        }
+
+        .admin-stat-value {
             font-size: 48px;
-            font-weight: 700;
-            color: #10b981;
-            margin-bottom: 10px;
+            font-weight: 900;
+            color: var(--green-success);
+            margin-bottom: 12px;
         }
 
-        .stat-title {
-            font-size: 18px;
-            color: rgba(255,255,255,0.8);
+        .admin-stat-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .orders-section {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
+        .admin-orders-section {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.05);
             border-radius: 20px;
-            padding: 30px;
+            padding: 32px;
             overflow-x: auto;
         }
 
-        .orders-title {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 25px;
+        .admin-section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
         }
 
-        .orders-table {
+        .admin-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .orders-table th {
-            background: rgba(107, 70, 193, 0.3);
-            padding: 15px;
+        .admin-table th {
+            background: rgba(139, 92, 246, 0.15);
+            padding: 16px;
             text-align: left;
             font-weight: 600;
-            border-bottom: 2px solid rgba(167, 139, 250, 0.5);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--purple-light);
+            border-bottom: 2px solid var(--purple-primary);
         }
 
-        .orders-table td {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+        .admin-table td {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
         }
 
-        .orders-table tr:hover {
-            background: rgba(255,255,255,0.05);
+        .admin-table tr:hover {
+            background: rgba(255,255,255,0.02);
         }
 
-        .btn-action {
-            background: #ef4444;
-            color: #fff;
-            border: none;
+        .btn-action-cancel {
             padding: 8px 16px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--red-error);
             border-radius: 8px;
-            cursor: pointer;
+            color: var(--red-error);
             font-weight: 600;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .btn-action:hover {
-            background: #dc2626;
+        .btn-action-cancel:hover {
+            background: var(--red-error);
+            color: #fff;
         }
 
-        /* ========== RESPONSIVE ========== */
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 768px) {
-            .brand-logo { font-size: 36px; }
-            .auth-container { flex-direction: column; }
-            .auth-card { width: 100%; max-width: 400px; }
-            .navbar { padding: 15px 20px; }
-            .nav-brand { font-size: 22px; }
-            .search-box { margin: 0 15px; }
-            .main-content { padding: 20px; }
-            .section-header { font-size: 26px; }
-            .welcome-title { font-size: 42px; }
-            .success-title { font-size: 36px; }
-            .payment-title { font-size: 28px; }
-            .admin-header { flex-direction: column; gap: 20px; }
+            .auth-logo { font-size: 42px; }
+            .auth-forms { grid-template-columns: 1fr; }
+            .welcome-title { font-size: 36px; }
+            .app-header { flex-wrap: wrap; }
+            .search-container { order: 3; width: 100%; }
+            .section-title { font-size: 22px; }
+            .admin-header-bar { flex-direction: column; gap: 20px; text-align: center; }
+            .payment-amount { font-size: 36px; }
+            .success-title { font-size: 32px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== LOGIN PAGE ==================== -->
-    <div id="loginPage" class="page active">
-        <div class="login-wrapper">
-            <div class="brand-logo">ARYAN'S MARKET</div>
-            <div class="brand-tagline">Shop Everything You Love, All in One Place</div>
-            
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-number">1M+</div>
-                    <div class="stat-label">Active Users</div>
+    <!-- ==================== AUTH SCREEN ==================== -->
+    <div id="authScreen">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="auth-logo">ARYAN'S MARKET</div>
+                <div class="auth-tagline">The Future of Online Shopping</div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value">1M+</div>
+                    <div class="stat-label">Happy Users</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">100K+</div>
+                <div class="stat-item">
+                    <div class="stat-value">100K+</div>
                     <div class="stat-label">Daily Orders</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">50K+</div>
+                <div class="stat-item">
+                    <div class="stat-value">50K+</div>
                     <div class="stat-label">Products</div>
                 </div>
+                <div class="stat-item">
+                    <div class="stat-value">99%</div>
+                    <div class="stat-label">Satisfaction</div>
+                </div>
             </div>
 
-            <div class="auth-container">
-                <!-- LOGIN FORM -->
-                <div class="auth-card">
-                    <div class="auth-title">Welcome Back</div>
-                    <input type="email" class="input-field" id="loginEmail" placeholder="Email Address">
-                    <input type="password" class="input-field" id="loginPass" placeholder="Password">
-                    <button class="submit-btn" onclick="login()">Sign In</button>
+            <div class="auth-forms">
+                <div class="auth-box">
+                    <div class="auth-box-title">Sign In</div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" id="loginEmail" placeholder="Email address">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" id="loginPassword" placeholder="Password">
+                    </div>
+                    <button class="btn-primary" onclick="handleLogin()">Sign In</button>
                 </div>
 
-                <!-- SIGNUP FORM -->
-                <div class="auth-card">
-                    <div class="auth-title">Create Account</div>
-                    <input type="text" class="input-field" id="signupName" placeholder="Full Name">
-                    <input type="email" class="input-field" id="signupEmail" placeholder="Email Address">
-                    <input type="password" class="input-field" id="signupPass" placeholder="Password">
-                    <button class="submit-btn" onclick="signup()">Sign Up</button>
+                <div class="auth-box">
+                    <div class="auth-box-title">Create Account</div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="signupName" placeholder="Full name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" id="signupEmail" placeholder="Email address">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" id="signupPassword" placeholder="Password">
+                    </div>
+                    <button class="btn-primary" onclick="handleSignup()">Create Account</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ==================== WELCOME PAGE ==================== -->
-    <div id="welcomePage" class="page">
-        <div class="welcome-title">Welcome <span id="userName"></span>! 🎉</div>
-        <div class="welcome-subtitle">Let's start our shopping journey together</div>
-        <button class="continue-btn" onclick="goToHome()">Let's Go!</button>
+    <!-- ==================== WELCOME SCREEN ==================== -->
+    <div id="welcomeScreen" class="hidden">
+        <div class="welcome-content">
+            <div class="welcome-emoji">👋</div>
+            <div class="welcome-title">Welcome, <span id="welcomeUserName"></span>!</div>
+            <div class="welcome-subtitle">Let's explore amazing products together</div>
+            <button class="btn-success" onclick="enterStore()">Start Shopping</button>
+        </div>
     </div>
 
-    <!-- ==================== HOME PAGE ==================== -->
-    <div id="homePage" class="page">
-        <!-- NAVBAR -->
-        <div class="navbar">
-            <div class="nav-brand">Aryan's Market</div>
-            <div class="search-box">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search for products..." oninput="searchProducts()">
+    <!-- ==================== HOME SCREEN ==================== -->
+    <div id="homeScreen" class="hidden">
+        <div class="app-header">
+            <div class="app-logo">Aryan's Market</div>
+            <div class="search-container">
+                <input type="text" class="search-input-main" id="mainSearchInput" placeholder="Search products, categories..." oninput="handleSearch()">
                 <span class="search-icon">🔍</span>
             </div>
+            <button class="user-profile-btn" onclick="viewProfile()">👤 Profile</button>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <!-- CATEGORIES -->
-            <div class="section-header">Shop by Category</div>
-            <div class="categories-row">
-                <div class="category-item" onclick="filterCategory('Electronics')">
-                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500" class="category-image" alt="Electronics">
-                    <div class="category-name">Electronics</div>
+        <div class="main-container">
+            <div class="section-title">Shop by Category</div>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterByCategory('Electronics')">
+                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=80" class="category-bg" alt="Electronics">
+                    <div class="category-label">Electronics</div>
                 </div>
-                <div class="category-item" onclick="filterCategory('Grocery')">
-                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500" class="category-image" alt="Grocery">
-                    <div class="category-name">Grocery</div>
+                <div class="category-card" onclick="filterByCategory('Grocery')">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80" class="category-bg" alt="Grocery">
+                    <div class="category-label">Grocery</div>
                 </div>
-                <div class="category-item" onclick="filterCategory('Clothes')">
-                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=500" class="category-image" alt="Clothes">
-                    <div class="category-name">Clothes</div>
+                <div class="category-card" onclick="filterByCategory('Clothes')">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&q=80" class="category-bg" alt="Fashion">
+                    <div class="category-label">Fashion</div>
                 </div>
-                <div class="category-item" onclick="filterCategory('Home')">
-                    <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500" class="category-image" alt="Home">
-                    <div class="category-name">Home & Kitchen</div>
+                <div class="category-card" onclick="filterByCategory('Home')">
+                    <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&q=80" class="category-bg" alt="Home">
+                    <div class="category-label">Home & Kitchen</div>
                 </div>
             </div>
 
-            <!-- PRODUCTS -->
-            <div class="section-header" id="productsTitle">Featured Products</div>
-            <div class="products-row" id="productsContainer"></div>
+            <div class="section-title" id="productsSectionTitle">Featured Products</div>
+            <div class="products-grid" id="productsGrid"></div>
         </div>
 
-        <!-- BOTTOM NAVIGATION -->
-        <div class="bottom-bar">
-            <button class="nav-item active" onclick="goToHome()">
-                <div class="nav-icon-text">🏠</div>
-                <div class="nav-label">Home</div>
+        <div class="bottom-nav">
+            <button class="nav-btn active" onclick="showHome()">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-text">Home</div>
             </button>
-            <button class="nav-item" onclick="goToCart()">
-                <div class="nav-icon-text">🛒</div>
-                <div class="nav-label">Cart</div>
-                <div class="badge" id="cartCount">0</div>
+            <button class="nav-btn" onclick="showCart()">
+                <div class="nav-icon">🛒</div>
+                <div class="nav-text">Cart</div>
+                <span class="cart-count" id="cartBadge">0</span>
             </button>
-            <button class="nav-item" onclick="showProfile()">
-                <div class="nav-icon-text">👤</div>
-                <div class="nav-label">Profile</div>
+            <button class="nav-btn" onclick="viewProfile()">
+                <div class="nav-icon">👤</div>
+                <div class="nav-text">Profile</div>
             </button>
         </div>
     </div>
 
-    <!-- ==================== CART PAGE ==================== -->
-    <div id="cartPage" class="page">
-        <div class="navbar">
-            <div class="nav-brand">Shopping Cart</div>
+    <!-- ==================== CART SCREEN ==================== -->
+    <div id="cartScreen" class="hidden">
+        <div class="app-header">
+            <div class="app-logo">Shopping Cart</div>
         </div>
-        
-        <div class="cart-content" id="cartContent"></div>
 
-        <div class="bottom-bar">
-            <button class="nav-item" onclick="goToHome()">
-                <div class="nav-icon-text">🏠</div>
-                <div class="nav-label">Home</div>
+        <div class="main-container">
+            <div id="cartContent"></div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="showHome()">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-text">Home</div>
             </button>
-            <button class="nav-item active" onclick="goToCart()">
-                <div class="nav-icon-text">🛒</div>
-                <div class="nav-label">Cart</div>
-                <div class="badge" id="cartCount2">0</div>
+            <button class="nav-btn active" onclick="showCart()">
+                <div class="nav-icon">🛒</div>
+                <div class="nav-text">Cart</div>
+                <span class="cart-count" id="cartBadge2">0</span>
             </button>
-            <button class="nav-item" onclick="showProfile()">
-                <div class="nav-icon-text">👤</div>
-                <div class="nav-label">Profile</div>
+            <button class="nav-btn" onclick="viewProfile()">
+                <div class="nav-icon">👤</div>
+                <div class="nav-text">Profile</div>
             </button>
         </div>
     </div>
 
-    <!-- ==================== PAYMENT PAGE ==================== -->
-    <div id="paymentPage" class="page">
-        <div class="payment-card">
-            <div class="payment-title">Complete Your Payment</div>
-            <div class="upi-box">
-                <div class="upi-label">Pay via UPI</div>
-                <div class="upi-id">aryanwithrizz@ybl</div>
-                <div class="upi-label">Amount to Pay</div>
-                <div class="amount-display">₹<span id="paymentTotal">0</span></div>
+    <!-- ==================== PAYMENT SCREEN ==================== -->
+    <div id="paymentScreen" class="hidden">
+        <div class="app-header">
+            <div class="app-logo">Payment</div>
+        </div>
+
+        <div class="payment-container">
+            <div class="payment-title">Complete Payment</div>
+            <div class="payment-upi-box">
+                <div class="payment-upi-label">Pay via UPI</div>
+                <div class="payment-upi-id">aryanwithrizz@ybl</div>
+                <div class="payment-upi-label">Amount</div>
+                <div class="payment-amount">₹<span id="finalAmount">0</span></div>
             </div>
-            <p style="color: rgba(255,255,255,0.7); margin: 20px 0;">Scan QR code or use any UPI app to pay</p>
-            <button class="btn-confirm" onclick="confirmPayment()">I've Paid - Confirm Order</button>
-            <button class="btn-back" onclick="goToCart()">Go Back to Cart</button>
+            <div class="payment-instruction">Scan QR code or use any UPI app to complete payment</div>
+            <button class="btn-confirm-payment" onclick="completeOrder()">I've Paid - Confirm Order</button>
+            <button class="btn-cancel" onclick="showCart()">Go Back</button>
         </div>
     </div>
 
-    <!-- ==================== SUCCESS PAGE ==================== -->
-    <div id="successPage" class="page">
-        <div class="success-icon-big">✅</div>
-        <div class="success-title">Order Placed Successfully!</div>
-        <div class="success-message">Thank you for shopping with Aryan's Market</div>
-        <div class="order-id-box">
-            <div class="order-id-label">Your Order ID</div>
-            <div class="order-id-value" id="orderIdDisplay"></div>
+    <!-- ==================== SUCCESS SCREEN ==================== -->
+    <div id="successScreen" class="hidden">
+        <div class="success-container">
+            <div class="success-icon">✅</div>
+            <div class="success-title">Order Placed!</div>
+            <div class="success-message">Thank you for shopping with Aryan's Market</div>
+            <div class="success-order-id">
+                <div class="success-order-label">Order ID</div>
+                <div class="success-order-value" id="finalOrderId"></div>
+            </div>
+            <button class="btn-success" onclick="showHome()">Continue Shopping</button>
         </div>
-        <button class="continue-btn" onclick="goToHome()">Continue Shopping</button>
     </div>
 
-    <!-- ==================== ADMIN PAGE ==================== -->
-    <div id="adminPage" class="page">
-        <div class="admin-header">
-            <div class="admin-title">Admin Dashboard</div>
-            <button class="btn-logout" onclick="logoutAdmin()">Logout</button>
-        </div>
+    <!-- ==================== ADMIN SCREEN ==================== -->
+    <div id="adminScreen" class="hidden">
+        <div class="main-container">
+            <div class="admin-header-bar">
+                <div class="admin-title">Admin Dashboard</div>
+                <button class="btn-logout" onclick="adminLogout()">Logout</button>
+            </div>
 
-        <div class="stats-grid">
-            <div class="stat-box-admin">
-                <div class="stat-value" id="adminTotalUsers">0</div>
-                <div class="stat-title">Total Users</div>
+            <div class="admin-stats-grid">
+                <div class="admin-stat-card">
+                    <div class="admin-stat-value" id="statUsers">0</div>
+                    <div class="admin-stat-label">Total Users</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-value" id="statOrders">0</div>
+                    <div class="admin-stat-label">Total Orders</div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="admin-stat-value">₹<span id="statRevenue">0</span></div>
+                    <div class="admin-stat-label">Total Revenue</div>
+                </div>
             </div>
-            <div class="stat-box-admin">
-                <div class="stat-value" id="adminTotalOrders">0</div>
-                <div class="stat-title">Total Orders</div>
-            </div>
-            <div class="stat-box-admin">
-                <div class="stat-value">₹<span id="adminRevenue">0</span></div>
-                <div class="stat-title">Total Revenue</div>
-            </div>
-        </div>
 
-        <div class="orders-section">
-            <div class="orders-title">All Orders</div>
-            <table class="orders-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Email</th>
-                        <th>Items</th>
-                        <th>Total</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="adminOrdersBody"></tbody>
-            </table>
+            <div class="admin-orders-section">
+                <div class="admin-section-title">Recent Orders</div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminOrdersTable"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
-        // ==================== GLOBAL VARIABLES ====================
-        let currentUser = null;
-        let cartItems = [];
-        let allProducts = [];
-
-        // ==================== PRODUCT DATABASE ====================
-        const productDatabase = [
-            // Electronics (5 products)
-            { id: 1, name: "Samsung Galaxy S23 Ultra", category: "Electronics", price: 89999, image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=500", desc: "Flagship smartphone with 200MP camera" },
-            { id: 2, name: "Sony WH-1000XM5 Headphones", category: "Electronics", price: 29990, image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500", desc: "Industry-leading noise cancellation" },
-            { id: 3, name: "MacBook Pro M2", category: "Electronics", price: 129900, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500", desc: "Powerful laptop for professionals" },
-            { id: 4, name: "iPad Pro 12.9 inch", category: "Electronics", price: 99900, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500", desc: "Ultimate creativity tablet" },
-            { id: 5, name: "Canon EOS R6", category: "Electronics", price: 199990, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500", desc: "Professional mirrorless camera" },
-
-            // Grocery (5 products)
-            { id: 6, name: "Organic Basmati Rice 5kg", category: "Grocery", price: 750, image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500", desc: "Premium aged basmati rice" },
-            { id: 7, name: "Dry Fruits Premium Mix 1kg", category: "Grocery", price: 1299, image: "https://images.unsplash.com/photo-1607161466485-c2101f8f4aa3?w=500", desc: "Cashews, almonds, raisins mix" },
-            { id: 8, name: "Extra Virgin Olive Oil 1L", category: "Grocery", price: 899, image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500", desc: "Cold pressed olive oil" },
-            { id: 9, name: "Darjeeling Tea Collection", category: "Grocery", price: 599, image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=500", desc: "Premium tea variety pack" },
-            { id: 10, name: "Pure Organic Honey 1kg", category: "Grocery", price: 650, image: "https://images.unsplash.com/photo-1587049352846-4a222e784acc?w=500", desc: "Raw unprocessed honey" },
-
-            // Clothes (5 products)
-            { id: 11, name: "Men's Formal Shirt", category: "Clothes", price: 1299, image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500", desc: "Premium cotton formal wear" },
-            { id: 12, name: "Women's Designer Dress", category: "Clothes", price: 2499, image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500", desc: "Elegant party wear dress" },
-            { id: 13, name: "Levi's Denim Jeans", category: "Clothes", price: 2999, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500", desc: "Classic fit blue jeans" },
-            { id: 14, name: "Nike Sports Jacket", category: "Clothes", price: 3499, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500", desc: "Waterproof sports jacket" },
-            { id: 15, name: "Formal Business Suit", category: "Clothes", price: 8999, image: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?w=500", desc: "Premium 3-piece suit" },
-
-            // Home & Kitchen (5 products)
-            { id: 16, name: "Philips Air Fryer", category: "Home", price: 8999, image: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=500", desc: "Healthy oil-free cooking" },
-            { id: 17, name: "Prestige Mixer Grinder", category: "Home", price: 4499, image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500", desc: "750W powerful motor" },
-            { id: 18, name: "Premium Cotton Bedsheet", category: "Home", price: 1999, image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500", desc: "King size bed linen set" },
-            { id: 19, name: "Designer Wall Clock", category: "Home", price: 1299, image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=500", desc: "Modern minimalist design" },
-            { id: 20, name: "LED Study Lamp", category: "Home", price: 1499, image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500", desc: "Adjustable brightness lamp" },
+        // ==================== DATA & STATE ====================
+        let user = null;
+        let cart = [];
+        
+        const PRODUCTS = [
+            // Electronics
+            { id: 1, name: "iPhone 15 Pro Max", category: "Electronics", price: 134900, image: "https://images.unsplash.com/photo-1678652197070-14254334f1cb?w=500&q=80" },
+            { id: 2, name: "Sony WH-1000XM5", category: "Electronics", price: 29990, image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80" },
+            { id: 3, name: "MacBook Pro M3", category: "Electronics", price: 199900, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80" },
+            { id: 4, name: "iPad Air M2", category: "Electronics", price: 59900, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&q=80" },
+            { id: 5, name: "Canon EOS R6 Mark II", category: "Electronics", price: 249900, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80" },
+            
+            // Grocery
+            { id: 6, name: "Organic Basmati Rice 10kg", category: "Grocery", price: 1499, image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&q=80" },
+            { id: 7, name: "Premium Dry Fruits Mix", category: "Grocery", price: 899, image: "https://images.unsplash.com/photo-1607161466485-c2101f8f4aa3?w=500&q=80" },
+            { id: 8, name: "Extra Virgin Olive Oil", category: "Grocery", price: 799, image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&q=80" },
+            { id: 9, name: "Assam Tea Collection", category: "Grocery", price: 499, image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=500&q=80" },
+            { id: 10, name: "Pure Forest Honey", category: "Grocery", price: 599, image: "https://images.unsplash.com/photo-1587049352846-4a222e784acc?w=500&q=80" },
+            
+            // Clothes
+            { id: 11, name: "Premium Cotton Shirt", category: "Clothes", price: 1299, image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=80" },
+            { id: 12, name: "Designer Evening Dress", category: "Clothes", price: 3499, image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&q=80" },
+            { id: 13, name: "Levi's Slim Fit Jeans", category: "Clothes", price: 2499, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&q=80" },
+            { id: 14, name: "Puma Sports Jacket", category: "Clothes", price: 2999, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80" },
+            { id: 15, name: "Raymond Formal Suit", category: "Clothes", price: 12999, image: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?w=500&q=80" },
+            
+            // Home
+            { id: 16, name: "Philips Air Fryer XXL", category: "Home", price: 9999, image: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=500&q=80" },
+            { id: 17, name: "Ninja Mixer Grinder", category: "Home", price: 5499, image: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500&q=80" },
+            { id: 18, name: "Egyptian Cotton Bedsheet", category: "Home", price: 2999, image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&q=80" },
+            { id: 19, name: "Titan Wall Clock", category: "Home", price: 1499, image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=500&q=80" },
+            { id: 20, name: "Philips LED Desk Lamp", category: "Home", price: 1799, image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80" },
         ];
 
-        // ==================== INITIALIZATION ====================
+        let displayedProducts = [...PRODUCTS];
+
+        // ==================== INIT ==================== 
         function init() {
-            allProducts = [...productDatabase];
-            loadData();
-            displayProducts(allProducts);
-            updateCartCount();
+            loadUserData();
+            renderProducts();
+            updateCartUI();
         }
 
-        function loadData() {
-            const user = localStorage.getItem('currentUser');
-            const cart = localStorage.getItem('cartItems');
-            if (user) currentUser = JSON.parse(user);
-            if (cart) cartItems = JSON.parse(cart);
+        function loadUserData() {
+            const savedUser = localStorage.getItem('user');
+            const savedCart = localStorage.getItem('cart');
+            if (savedUser) user = JSON.parse(savedUser);
+            if (savedCart) cart = JSON.parse(savedCart);
         }
 
-        function saveData() {
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        function saveUserData() {
+            if (user) localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
 
-        // ==================== PAGE NAVIGATION ====================
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+        // ==================== NAVIGATION ====================
+        function switchScreen(screenId) {
+            document.querySelectorAll('#authScreen, #welcomeScreen, #homeScreen, #cartScreen, #paymentScreen, #successScreen, #adminScreen').forEach(s => s.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
         }
 
-        // ==================== AUTHENTICATION ====================
-        function login() {
+        // ==================== AUTH ====================
+        function handleLogin() {
             const email = document.getElementById('loginEmail').value.trim();
-            const pass = document.getElementById('loginPass').value.trim();
+            const pass = document.getElementById('loginPassword').value.trim();
 
             if (!email || !pass) {
-                alert('⚠️ Please enter email and password');
+                alert('⚠️ Please fill all fields');
                 return;
             }
 
-            // Check for admin
+            // Admin check
             if (email === 'aryanarvindpandit@gmail.com' && pass === '@ryan777') {
-                loadAdminPanel();
+                loadAdmin();
                 return;
             }
 
-            // Check regular user
-            const users = JSON.parse(localStorage.getItem('allUsers') || '[]');
-            const user = users.find(u => u.email === email && u.password === pass);
+            // User check
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const found = users.find(u => u.email === email && u.password === pass);
 
-            if (user) {
-                currentUser = user;
-                saveData();
-                document.getElementById('userName').textContent = user.name;
-                showPage('welcomePage');
+            if (found) {
+                user = found;
+                saveUserData();
+                document.getElementById('welcomeUserName').textContent = user.name;
+                switchScreen('welcomeScreen');
             } else {
-                alert('❌ Invalid credentials! Please sign up first.');
+                alert('❌ Invalid credentials! Please sign up.');
             }
         }
 
-        function signup() {
+        function handleSignup() {
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
-            const pass = document.getElementById('signupPass').value.trim();
+            const pass = document.getElementById('signupPassword').value.trim();
 
             if (!name || !email || !pass) {
                 alert('⚠️ Please fill all fields');
                 return;
             }
 
-            const users = JSON.parse(localStorage.getItem('allUsers') || '[]');
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
 
             if (users.find(u => u.email === email)) {
-                alert('⚠️ Email already registered! Please login.');
+                alert('⚠️ Email already exists! Please login.');
                 return;
             }
 
-            const newUser = { name, email, password: pass, joinedAt: new Date().toISOString() };
+            const newUser = { name, email, password: pass, joined: new Date().toISOString() };
             users.push(newUser);
-            localStorage.setItem('allUsers', JSON.stringify(users));
+            localStorage.setItem('users', JSON.stringify(users));
 
-            currentUser = newUser;
-            saveData();
-            document.getElementById('userName').textContent = name;
-            showPage('welcomePage');
+            user = newUser;
+            saveUserData();
+            document.getElementById('welcomeUserName').textContent = name;
+            switchScreen('welcomeScreen');
         }
 
-        function goToHome() {
-            showPage('homePage');
-            displayProducts(allProducts);
-            document.getElementById('productsTitle').textContent = 'Featured Products';
+        function enterStore() {
+            switchScreen('homeScreen');
+        }
+
+        function showHome() {
+            switchScreen('homeScreen');
+            displayedProducts = [...PRODUCTS];
+            renderProducts();
+            document.getElementById('productsSectionTitle').textContent = 'Featured Products';
         }
 
         // ==================== PRODUCTS ====================
-        function displayProducts(products) {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
-
-            products.forEach(product => {
-                container.innerHTML += `
-                    <div class="product-item">
-                        <img src="${product.image}" class="product-image" alt="${product.name}">
-                        <div class="product-details">
-                            <div class="product-title">${product.name}</div>
-                            <div class="product-price">₹${product.price.toLocaleString()}</div>
-                            <div class="product-actions">
-                                <button class="btn-cart" onclick="addToCart(${product.id})">Add to Cart</button>
-                                <button class="btn-buy" onclick="buyNow(${product.id})">Buy Now</button>
-                            </div>
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = displayedProducts.map(p => `
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="${p.image}" class="product-img" alt="${p.name}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">₹${p.price.toLocaleString()}</div>
+                        <div class="product-buttons">
+                            <button class="btn-add-cart" onclick="addToCart(${p.id})">Add to Cart</button>
+                            <button class="btn-buy-now" onclick="buyNow(${p.id})">Buy Now</button>
                         </div>
                     </div>
-                `;
-            });
+                </div>
+            `).join('');
         }
 
-        function filterCategory(category) {
-            const filtered = allProducts.filter(p => p.category === category);
-            displayProducts(filtered);
-            document.getElementById('productsTitle').textContent = category;
+        function filterByCategory(cat) {
+            displayedProducts = PRODUCTS.filter(p => p.category === cat);
+            renderProducts();
+            document.getElementById('productsSectionTitle').textContent = cat;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function searchProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
+        function handleSearch() {
+            const query = document.getElementById('mainSearchInput').value.toLowerCase();
             if (!query) {
-                displayProducts(allProducts);
-                document.getElementById('productsTitle').textContent = 'Featured Products';
-                return;
+                displayedProducts = [...PRODUCTS];
+            } else {
+                displayedProducts = PRODUCTS.filter(p => 
+                    p.name.toLowerCase().includes(query) || 
+                    p.category.toLowerCase().includes(query)
+                );
             }
-
-            const results = allProducts.filter(p => 
-                p.name.toLowerCase().includes(query) || 
-                p.category.toLowerCase().includes(query)
-            );
-            displayProducts(results);
-            document.getElementById('productsTitle').textContent = `Results for "${query}"`;
+            renderProducts();
+            document.getElementById('productsSectionTitle').textContent = query ? `Search: "${query}"` : 'Featured Products';
         }
 
-        // ==================== CART FUNCTIONS ====================
-        function addToCart(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            const existing = cartItems.find(item => item.id === productId);
+        // ==================== CART ====================
+        function addToCart(id) {
+            const product = PRODUCTS.find(p => p.id === id);
+            const existing = cart.find(c => c.id === id);
 
             if (existing) {
                 existing.qty++;
             } else {
-                cartItems.push({ ...product, qty: 1 });
+                cart.push({ ...product, qty: 1 });
             }
 
-            saveData();
-            updateCartCount();
-            alert(`✅ ${product.name} added to cart!`);
+            saveUserData();
+            updateCartUI();
+            
+            // Show feedback
+            const btn = event.target;
+            const original = btn.textContent;
+            btn.textContent = '✓ Added';
+            btn.style.background = 'var(--green-success)';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+                btn.textContent = original;
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 1000);
         }
 
-        function removeFromCart(productId) {
-            cartItems = cartItems.filter(item => item.id !== productId);
-            saveData();
-            updateCartCount();
-            goToCart();
+        function removeFromCart(id) {
+            cart = cart.filter(c => c.id !== id);
+            saveUserData();
+            updateCartUI();
+            showCart();
         }
 
-        function updateCartCount() {
-            const total = cartItems.reduce((sum, item) => sum + item.qty, 0);
-            document.getElementById('cartCount').textContent = total;
-            document.getElementById('cartCount2').textContent = total;
+        function updateCartUI() {
+            const total = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartBadge').textContent = total;
+            document.getElementById('cartBadge2').textContent = total;
         }
 
-        function goToCart() {
-            showPage('cartPage');
+        function showCart() {
+            switchScreen('cartScreen');
             const content = document.getElementById('cartContent');
 
-            if (cartItems.length === 0) {
+            if (cart.length === 0) {
                 content.innerHTML = `
-                    <div class="empty-cart">
+                    <div class="empty-state">
                         <div class="empty-icon">🛒</div>
-                        <div class="empty-text">Your cart is empty!</div>
+                        <div class="empty-text">Your cart is empty</div>
                     </div>
                 `;
                 return;
             }
 
             let total = 0;
-            let html = '';
+            let html = '<div class="cart-list">';
 
-            cartItems.forEach(item => {
+            cart.forEach(item => {
                 const itemTotal = item.price * item.qty;
                 total += itemTotal;
                 html += `
-                    <div class="cart-item-card">
-                        <img src="${item.image}" class="cart-item-image" alt="${item.name}">
-                        <div class="cart-item-info">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div>Quantity: ${item.qty}</div>
+                    <div class="cart-item">
+                        <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-qty">Qty: ${item.qty}</div>
                             <div class="cart-item-price">₹${itemTotal.toLocaleString()}</div>
                         </div>
                         <button class="btn-remove" onclick="removeFromCart(${item.id})">Remove</button>
@@ -1317,112 +1495,109 @@
                 `;
             });
 
-            html += `
-                <div class="cart-summary">
-                    <div class="total-label">Total Amount</div>
-                    <div class="total-amount">₹${total.toLocaleString()}</div>
+            html += `</div>
+                <div class="cart-total-box">
+                    <div class="cart-total-label">Total Amount</div>
+                    <div class="cart-total-amount">₹${total.toLocaleString()}</div>
                 </div>
-                <button class="btn-checkout" onclick="checkout(${total})">Proceed to Checkout</button>
+                <button class="btn-checkout" onclick="proceedToPayment(${total})">Proceed to Payment</button>
             `;
 
             content.innerHTML = html;
         }
 
-        function buyNow(productId) {
-            cartItems = [];
-            addToCart(productId);
-            const product = allProducts.find(p => p.id === productId);
-            checkout(product.price);
+        function buyNow(id) {
+            cart = [];
+            addToCart(id);
+            const product = PRODUCTS.find(p => p.id === id);
+            proceedToPayment(product.price);
         }
 
         // ==================== PAYMENT ====================
-        function checkout(amount) {
-            document.getElementById('paymentTotal').textContent = amount.toLocaleString();
-            showPage('paymentPage');
+        function proceedToPayment(amount) {
+            document.getElementById('finalAmount').textContent = amount.toLocaleString();
+            switchScreen('paymentScreen');
         }
 
-        function confirmPayment() {
+        function completeOrder() {
             const orderId = 'ORD' + Date.now();
-            const orderTotal = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-            const orderData = {
+            const order = {
                 orderId,
-                customer: currentUser.name,
-                email: currentUser.email,
-                items: cartItems.length,
-                total: orderTotal,
+                customer: user.name,
+                email: user.email,
+                items: cart.length,
+                total,
                 date: new Date().toLocaleString(),
-                products: [...cartItems]
+                products: [...cart]
             };
 
-            const orders = JSON.parse(localStorage.getItem('allOrders') || '[]');
-            orders.push(orderData);
-            localStorage.setItem('allOrders', JSON.stringify(orders));
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
 
-            cartItems = [];
-            saveData();
-            updateCartCount();
+            cart = [];
+            saveUserData();
+            updateCartUI();
 
-            document.getElementById('orderIdDisplay').textContent = orderId;
-            showPage('successPage');
+            document.getElementById('finalOrderId').textContent = orderId;
+            switchScreen('successScreen');
         }
 
         // ==================== PROFILE ====================
-        function showProfile() {
-            alert(`👤 Profile Information\n\nName: ${currentUser.name}\nEmail: ${currentUser.email}\n\n📧 Contact: aryanarvindpandit@gmail.com`);
+        function viewProfile() {
+            alert(`👤 Profile\n\nName: ${user.name}\nEmail: ${user.email}\n\n📞 Support: aryanarvindpandit@gmail.com`);
         }
 
-        // ==================== ADMIN PANEL ====================
-        function loadAdminPanel() {
-            showPage('adminPage');
+        // ==================== ADMIN ====================
+        function loadAdmin() {
+            switchScreen('adminScreen');
 
-            const users = JSON.parse(localStorage.getItem('allUsers') || '[]');
-            const orders = JSON.parse(localStorage.getItem('allOrders') || '[]');
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
             const revenue = orders.reduce((sum, o) => sum + o.total, 0);
 
-            document.getElementById('adminTotalUsers').textContent = users.length;
-            document.getElementById('adminTotalOrders').textContent = orders.length;
-            document.getElementById('adminRevenue').textContent = revenue.toLocaleString();
+            document.getElementById('statUsers').textContent = users.length;
+            document.getElementById('statOrders').textContent = orders.length;
+            document.getElementById('statRevenue').textContent = revenue.toLocaleString();
 
-            const tbody = document.getElementById('adminOrdersBody');
-            tbody.innerHTML = '';
-
+            const tbody = document.getElementById('adminOrdersTable');
+            
             if (orders.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No orders yet</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;">No orders yet</td></tr>';
                 return;
             }
 
-            orders.reverse().forEach(order => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${order.orderId}</td>
-                        <td>${order.customer}</td>
-                        <td>${order.email}</td>
-                        <td>${order.items}</td>
-                        <td>₹${order.total.toLocaleString()}</td>
-                        <td>${order.date}</td>
-                        <td><button class="btn-action" onclick="cancelOrder('${order.orderId}')">Cancel</button></td>
-                    </tr>
-                `;
-            });
+            tbody.innerHTML = orders.reverse().map(o => `
+                <tr>
+                    <td>${o.orderId}</td>
+                    <td>${o.customer}</td>
+                    <td>${o.email}</td>
+                    <td>${o.items}</td>
+                    <td>₹${o.total.toLocaleString()}</td>
+                    <td>${o.date}</td>
+                    <td><button class="btn-action-cancel" onclick="cancelOrder('${o.orderId}')">Cancel</button></td>
+                </tr>
+            `).join('');
         }
 
         function cancelOrder(orderId) {
             if (confirm('Cancel this order?')) {
-                let orders = JSON.parse(localStorage.getItem('allOrders') || '[]');
+                let orders = JSON.parse(localStorage.getItem('orders') || '[]');
                 orders = orders.filter(o => o.orderId !== orderId);
-                localStorage.setItem('allOrders', JSON.stringify(orders));
-                loadAdminPanel();
-                alert('✅ Order cancelled successfully!');
+                localStorage.setItem('orders', JSON.stringify(orders));
+                loadAdmin();
+                alert('✅ Order cancelled');
             }
         }
 
-        function logoutAdmin() {
-            showPage('loginPage');
+        function adminLogout() {
+            switchScreen('authScreen');
         }
 
-        // ==================== START APP ====================
+        // ==================== START ====================
         init();
     </script>
 </body>
-                </html>
+    </html>
