@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan's Market - Premium Shopping</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple: #8B5CF6;
+            --purple-dark: #6D28D9;
+            --purple-light: #A78BFA;
+            --green: #10B981;
+            --red: #EF4444;
+            --blue: #3B82F6;
+            --dark: #0F0F0F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .screen {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ==================== LOGIN SCREEN ==================== */
+        #loginScreen {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.15), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15), transparent 50%),
+                        linear-gradient(135deg, #000 0%, #1a0033 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-box {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, var(--purple-light) 50%, #EC4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .stats-mini {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-mini {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--purple-light);
+        }
+
+        .stat-text {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+        }
+
+        .form-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .input:focus {
+            border-color: var(--purple);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+        }
+
+        .input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--green), #059669);
+            color: #fff;
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3);
+            padding: 20px 60px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 16px;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .switch-link {
+            margin-top: 20px;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+
+        .switch-link a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==================== WELCOME SCREEN ==================== */
+        #welcomeScreen {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .welcome-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, var(--purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-subtitle {
+            font-size: 20px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 50px;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple), #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 48px 12px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--purple);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            opacity: 0.4;
+        }
+
+        .profile-btn {
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple);
+            border-radius: 10px;
+            color: var(--purple-light);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ==================== BOTTOM NAV ==================== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 20px;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: var(--purple);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge {
+            position: absolute;
+            top: 4px;
+            right: 12px;
+            background: var(--red);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================== MAIN CONTAINER ==================== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px 100px 24px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        /* ==================== CATEGORIES ==================== */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .category {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            height: 180px;
+            transition: all 0.3s;
+        }
+
+        .category::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
+            z-index: 2;
+        }
+
+        .category:hover {
+            transform: translateY(-8px);
+        }
+
+        .category:hover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid var(--purple);
+            border-radius: 20px;
+            z-index: 3;
+        }
+
+        .category-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-name {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 4;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* ==================== PRODUCTS GRID ==================== */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .product {
+            background: #1A1A1A;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            border-color: var(--purple);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .product-img-wrapper {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .product:hover .product-img {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            min-height: 48px;
+        }
+
+        .product-price {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .product-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-cart {
+            flex: 1;
+            padding: 12px;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple-light);
+            border: 1px solid var(--purple);
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cart:hover {
+            background: var(--purple);
+            color: #fff;
+        }
+
+        .btn-buy {
+            flex: 1;
+            padding: 12px;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: #059669;
+        }
+
+        /* ==================== PRODUCT DETAIL PAGE ==================== */
+        .product-detail {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .detail-content {
+            background: #1A1A1A;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        .detail-img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .detail-name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .detail-price {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--green);
+            margin-bottom: 30px;
+        }
+
+        .detail-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .detail-btns .btn-cart,
+        .detail-btns .btn-buy {
+            padding: 18px;
+            font-size: 18px;
+        }
+
+        /* ==================== CART ==================== */
+        .cart-item {
+            background: #1A1A1A;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cart-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        .cart-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cart-qty {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+        }
+
+        .cart-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .btn-remove {
+            padding: 10px 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--red);
+            border-radius: 10px;
+            color: var(--red);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-remove:hover {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .cart-total {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(109, 40, 217, 0.15));
+            border: 1px solid var(--purple);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .total-label {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+        }
+
+        .total-amount {
+            font-size: 42px;
+            font-weight: 900;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--green), #059669);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-text {
+            font-size: 20px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ==================== PAYMENT ==================== */
+        .payment-box {
+            max-width: 500px;
+            margin: 80px auto;
+            background: #1A1A1A;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .payment-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .upi-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(109, 40, 217, 0.15));
+            border: 1px solid var(--purple);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .upi-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .upi-id {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 24px;
+        }
+
+        .amount {
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--green), #059669);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .btn-confirm:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ==================== SUCCESS ==================== */
+        .success-box {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .success-icon {
+            font-size: 120px;
+            margin-bottom: 32px;
+        }
+
+        .success-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .success-msg {
+            font-size: 18px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
+        }
+
+        .order-box {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--purple);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        .order-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+        }
+
+        .order-id {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        /* ==================== ADMIN ==================== */
+        .admin-header {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            padding: 32px 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title {
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        .btn-logout {
+            padding: 12px 28px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            background: var(--red);
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #1A1A1A;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        .stat-name {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+        }
+
+        .orders-section {
+            background: #1A1A1A;
+            border-radius: 20px;
+            padding: 32px;
+            overflow-x: auto;
+        }
+
+        .orders-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: rgba(139, 92, 246, 0.15);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            color: var(--purple-light);
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .btn-cancel {
+            padding: 8px 16px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--red);
+            border-radius: 8px;
+            color: var(--red);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-cancel:hover {
+            background: var(--red);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 36px; }
+            .welcome-title { font-size: 36px; }
+            .header { flex-wrap: wrap; }
+            .search-box { order: 3; width: 100%; margin-top: 10px; }
+            .admin-header { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== LOGIN SCREEN ==================== -->
+    <div id="loginScreen" class="screen active">
+        <div class="auth-box">
+            <div class="logo">ARYAN'S MARKET</div>
+            <div class="tagline">Premium Shopping Experience</div>
+            
+            <div class="stats-mini">
+                <div class="stat-mini">
+                    <div class="stat-num">1M+</div>
+                    <div class="stat-text">Users</div>
+                </div>
+                <div class="stat-mini">
+                    <div class="stat-num">100K+</div>
+                    <div class="stat-text">Orders</div>
+                </div>
+                <div class="stat-mini">
+                    <div class="stat-num">50K+</div>
+                    <div class="stat-text">Products</div>
+                </div>
+            </div>
+
+            <div id="loginForm">
+                <div class="form-title">Sign In</div>
+                <div class="input-box">
+                    <input type="email" class="input" id="loginEmail" placeholder="Email address">
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input" id="loginPass" placeholder="Password">
+                </div>
+                <button class="btn btn-primary" onclick="login()">Sign In</button>
+                <div class="switch-link">
+                    Don't have an account? <a onclick="showSignup()">Create Account</a>
+                </div>
+            </div>
+
+            <div id="signupForm" style="display: none;">
+                <div class="form-title">Create Account</div>
+                <div class="input-box">
+                    <input type="text" class="input" id="signupName" placeholder="Full name">
+                </div>
+                <div class="input-box">
+                    <input type="email" class="input" id="signupEmail" placeholder="Email address">
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input" id="signupPass" placeholder="Password">
+                </div>
+                <button class="btn btn-primary" onclick="signup()">Create Account</button>
+                <div class="switch-link">
+                    Already have an account? <a onclick="showLogin()">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== WELCOME SCREEN ==================== -->
+    <div id="welcomeScreen" class="screen">
+        <div class="welcome-emoji">👋</div>
+        <div class="welcome-title">Welcome, <span id="userName"></span>!</div>
+        <div class="welcome-subtitle">Let's explore amazing products</div>
+        <button class="btn btn-success" onclick="goHome()">Start Shopping</button>
+    </div>
+
+    <!-- ==================== HOME SCREEN ==================== -->
+    <div id="homeScreen" class="screen">
+        <div class="header">
+            <div class="header-logo" onclick="goHome()">Aryan's Market</div>
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search products..." oninput="search()">
+                <span class="search-icon">🔍</span>
+            </div>
+            <button class="profile-btn" onclick="showProfile()">👤 Profile</button>
+        </div>
+
+        <div class="container">
+            <div class="section-title">Shop by Category</div>
+            <div class="categories">
+                <div class="category" onclick="openCategory('Electronics')">
+                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=80" class="category-img">
+                    <div class="category-name">Electronics</div>
+                </div>
+                <div class="category" onclick="openCategory('Grocery')">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80" class="category-img">
+                    <div class="category-name">Grocery</div>
+                </div>
+                <div class="category" onclick="openCategory('Clothes')">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&q=80" class="category-img">
+                    <div class="category-name">Fashion</div>
+                </div>
+                <div class="category" onclick="openCategory('Home')">
+                    <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&q=80" class="category-img">
+                    <div class="category-name">Home & Kitchen</div>
+                </div>
+            </div>
+
+            <div class="section-title">Featured Products</div>
+            <div class="products" id="productsGrid"></div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-item active" onclick="goHome()">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </button>
+            <button class="nav-item" onclick="openCart()">
+                <div class="nav-icon">🛒</div>
+                <div class="nav-label">Cart</div>
+                <span class="badge" id="cartBadge">0</span>
+            </button>
+            <button class="nav-item" onclick="showProfile()">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== CATEGORY SCREEN ==================== -->
+    <div id="categoryScreen" class="screen">
+        <div class="header">
+            <div class="header-logo" onclick="goHome()">Aryan's Market</div>
+        </div>
+
+        <div class="container">
+            <button class="back-btn" onclick="goHome()">← Back to Home</button>
+            <div class="section-title" id="categoryTitle"></div>
+            <div class="products" id="categoryProducts"></div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-item" onclick="goHome()">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </button>
+            <button class="nav-item" onclick="openCart()">
+                <div class="nav-icon">🛒</div>
+                <div class="nav-label">Cart</div>
+                <span class="badge" id="cartBadge2">0</span>
+            </button>
+            <button class="nav-item" onclick="showProfile()">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== PRODUCT DETAIL SCREEN ==================== -->
+    <div id="productScreen" class="screen">
+        <div class="header">
+            <div class="header-logo" onclick="goHome()">Aryan's Market</div>
+        </div>
+
+        <div class="container">
+            <div class="product-detail">
+                <button class="back-btn" onclick="goBack()">← Back</button>
+                <div class="detail-content" id="productDetail"></div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-item" onclick="goHome()">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </button>
+            <button class="nav-item" onclick="openCart()">
+                <div class="nav-icon">🛒</div>
+                <div class="nav-label">Cart</div>
+                <span class="badge" id="cartBadge3">0</span>
+            </button>
+            <button class="nav-item" onclick="showProfile()">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== CART SCREEN ==================== -->
+    <div id="cartScreen" class="screen">
+        <div class="header">
+            <div class="header-logo">Shopping Cart</div>
+        </div>
+
+        <div class="container" id="cartContent"></div>
+
+        <div class="bottom-nav">
+            <button class="nav-item" onclick="goHome()">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </button>
+            <button class="nav-item active" onclick="openCart()">
+                <div class="nav-icon">🛒</div>
+                <div class="nav-label">Cart</div>
+                <span class="badge" id="cartBadge4">0</span>
+            </button>
+            <button class="nav-item" onclick="showProfile()">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== PAYMENT SCREEN ==================== -->
+    <div id="paymentScreen" class="screen">
+        <div class="header">
+            <div class="header-logo">Payment</div>
+        </div>
+
+        <div class="payment-box">
+            <div class="payment-title">Complete Payment</div>
+            <div class="upi-box">
+                <div class="upi-label">Pay via UPI</div>
+                <div class="upi-id">aryanwithrizz@ybl</div>
+                <div class="upi-label">Amount</div>
+                <div class="amount">₹<span id="payAmount">0</span></div>
+            </div>
+            <button class="btn-confirm" onclick="confirmPay()">I've Paid - Confirm</button>
+            <button class="btn-back" onclick="openCart()">Go Back</button>
+        </div>
+    </div>
+
+    <!-- ==================== SUCCESS SCREEN ==================== -->
+    <div id="successScreen" class="screen">
+        <div class="success-box">
+            <div class="success-icon">✅</div>
+            <div class="success-title">Order Placed!</div>
+            <div class="success-msg">Thank you for shopping with us</div>
+            <div class="order-box">
+                <div class="order-label">Order ID</div>
+                <div class="order-id" id="orderId"></div>
+            </div>
+            <button class="btn btn-success" onclick="goHome()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- ==================== ADMIN SCREEN ==================== -->
+    <div id="adminScreen" class="screen">
+        <div class="container">
+            <div class="admin-header">
+                <div class="admin-title">Admin Dashboard</div>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalUsers">0</div>
+                    <div class="stat-name">Total Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalOrders">0</div>
+                    <div class="stat-name">Total Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">₹<span id="totalRevenue">0</span></div>
+                    <div class="stat-name">Revenue</div>
+                </div>
+            </div>
+
+            <div class="orders-section">
+                <div class="orders-title">All Orders</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== DATA ====================
+        let user = null;
+        let cart = [];
+        let lastScreen = 'homeScreen';
+
+        const PRODUCTS = [
+            { id: 1, name: "iPhone 15 Pro Max", cat: "Electronics", price: 134900, img: "https://images.unsplash.com/photo-1678652197070-14254334f1cb?w=500&q=80" },
+            { id: 2, name: "Sony WH-1000XM5", cat: "Electronics", price: 29990, img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80" },
+            { id: 3, name: "MacBook Pro M3", cat: "Electronics", price: 199900, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80" },
+            { id: 4, name: "iPad Air M2", cat: "Electronics", price: 59900, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&q=80" },
+            { id: 5, name: "Canon EOS R6", cat: "Electronics", price: 249900, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80" },
+            
+            { id: 6, name: "Organic Basmati Rice 10kg", cat: "Grocery", price: 1499, img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&q=80" },
+            { id: 7, name: "Premium Dry Fruits", cat: "Grocery", price: 899, img: "https://images.unsplash.com/photo-1607161466485-c2101f8f4aa3?w=500&q=80" },
+            { id: 8, name: "Olive Oil 1L", cat: "Grocery", price: 799, img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&q=80" },
+            { id: 9, name: "Assam Tea Pack", cat: "Grocery", price: 499, img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=500&q=80" },
+            { id: 10, name: "Pure Honey 1kg", cat: "Grocery", price: 599, img: "https://images.unsplash.com/photo-1587049352846-4a222e784acc?w=500&q=80" },
+            
+            { id: 11, name: "Cotton Formal Shirt", cat: "Clothes", price: 1299, img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=80" },
+            { id: 12, name: "Designer Dress", cat: "Clothes", price: 3499, img: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&q=80" },
+            { id: 13, name: "Levi's Jeans", cat: "Clothes", price: 2499, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&q=80" },
+            { id: 14, name: "Sports Jacket", cat: "Clothes", price: 2999, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80" },
+            { id: 15, name: "Formal Suit", cat: "Clothes", price: 12999, img: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?w=500&q=80" },
+            
+            { id: 16, name: "Air Fryer", cat: "Home", price: 9999, img: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=500&q=80" },
+            { id: 17, name: "Mixer Grinder", cat: "Home", price: 5499, img: "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=500&q=80" },
+            { id: 18, name: "Cotton Bedsheet", cat: "Home", price: 2999, img: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&q=80" },
+            { id: 19, name: "Wall Clock", cat: "Home", price: 1499, img: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=500&q=80" },
+            { id: 20, name: "LED Desk Lamp", cat: "Home", price: 1799, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80" },
+        ];
+
+        // ==================== INIT ====================
+        function init() {
+            const savedUser = localStorage.getItem('user');
+            const savedCart = localStorage.getItem('cart');
+            if (savedUser) user = JSON.parse(savedUser);
+            if (savedCart) cart = JSON.parse(savedCart);
+            renderProducts();
+            updateCartBadge();
+        }
+
+        function save() {
+            if (user) localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function show(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        // ==================== AUTH ====================
+        function showLogin() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+        }
+
+        function showSignup() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+        }
+
+        function login() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const pass = document.getElementById('loginPass').value.trim();
+
+            if (!email || !pass) return alert('⚠️ Fill all fields');
+
+            // Admin
+            if (email === 'aryanarvindpandit@gmail.com' && pass === '@ryan777') {
+                loadAdmin();
+                return;
+            }
+
+            // User
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const found = users.find(u => u.email === email && u.password === pass);
+
+            if (found) {
+                user = found;
+                save();
+                document.getElementById('userName').textContent = user.name;
+                show('welcomeScreen');
+            } else {
+                alert('❌ Invalid! Please sign up.');
+            }
+        }
+
+        function signup() {
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const pass = document.getElementById('signupPass').value.trim();
+
+            if (!name || !email || !pass) return alert('⚠️ Fill all fields');
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(u => u.email === email)) return alert('⚠️ Email exists!');
+
+            const newUser = { name, email, password: pass };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            user = newUser;
+            save();
+            document.getElementById('userName').textContent = name;
+            show('welcomeScreen');
+        }
+
+        function goHome() {
+            show('homeScreen');
+            renderProducts();
+        }
+
+        // ==================== PRODUCTS ====================
+        function renderProducts(list = PRODUCTS) {
+            const html = list.map(p => `
+                <div class="product" onclick="openProduct(${p.id})">
+                    <div class="product-img-wrapper">
+                        <img src="${p.img}" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">₹${p.price.toLocaleString()}</div>
+                        <div class="product-btns">
+                            <button class="btn-cart" onclick="event.stopPropagation(); addCart(${p.id})">Add to Cart</button>
+                            <button class="btn-buy" onclick="event.stopPropagation(); buyNow(${p.id})">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('productsGrid').innerHTML = html;
+        }
+
+        function openCategory(cat) {
+            lastScreen = 'homeScreen';
+            const filtered = PRODUCTS.filter(p => p.cat === cat);
+            const html = filtered.map(p => `
+                <div class="product" onclick="openProduct(${p.id})">
+                    <div class="product-img-wrapper">
+                        <img src="${p.img}" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">₹${p.price.toLocaleString()}</div>
+                        <div class="product-btns">
+                            <button class="btn-cart" onclick="event.stopPropagation(); addCart(${p.id})">Add to Cart</button>
+                            <button class="btn-buy" onclick="event.stopPropagation(); buyNow(${p.id})">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('categoryTitle').textContent = cat;
+            document.getElementById('categoryProducts').innerHTML = html;
+            show('categoryScreen');
+        }
+
+        function openProduct(id) {
+            lastScreen = document.querySelector('.screen.active').id;
+            const p = PRODUCTS.find(x => x.id === id);
+            const html = `
+                <img src="${p.img}" class="detail-img">
+                <div class="detail-name">${p.name}</div>
+                <div class="detail-price">₹${p.price.toLocaleString()}</div>
+                <div class="detail-btns">
+                    <button class="btn-cart" onclick="addCart(${p.id})">Add to Cart</button>
+                    <button class="btn-buy" onclick="buyNow(${p.id})">Buy Now</button>
+                </div>
+            `;
+            document.getElementById('productDetail').innerHTML = html;
+            show('productScreen');
+        }
+
+        function goBack() {
+            show(lastScreen);
+        }
+
+        function search() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = q ? PRODUCTS.filter(p => p.name.toLowerCase().includes(q)) : PRODUCTS;
+            renderProducts(filtered);
+        }
+
+        // ==================== CART ====================
+        function addCart(id) {
+            const p = PRODUCTS.find(x => x.id === id);
+            const existing = cart.find(x => x.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...p, qty: 1 });
+            }
+            save();
+            updateCartBadge();
+            alert('✅ Added to cart!');
+        }
+
+        function removeCart(id) {
+            cart = cart.filter(x => x.id !== id);
+            save();
+            updateCartBadge();
+            openCart();
+        }
+
+        function updateCartBadge() {
+            const total = cart.reduce((sum, x) => sum + x.qty, 0);
+            ['cartBadge', 'cartBadge2', 'cartBadge3', 'cartBadge4'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = total;
+            });
+        }
+
+        function openCart() {
+            lastScreen = 'homeScreen';
+            if (cart.length === 0) {
+                document.getElementById('cartContent').innerHTML = `
+                    <div class="empty">
+                        <div class="empty-icon">🛒</div>
+                        <div class="empty-text">Cart is empty</div>
+                    </div>
+                `;
+            } else {
+                let total = 0;
+                let html = '';
+                cart.forEach(x => {
+                    const itemTotal = x.price * x.qty;
+                    total += itemTotal;
+                    html += `
+                        <div class="cart-item">
+                            <img src="${x.img}" class="cart-img">
+                            <div class="cart-info">
+                                <div class="cart-name">${x.name}</div>
+                                <div class="cart-qty">Qty: ${x.qty}</div>
+                                <div class="cart-price">₹${itemTotal.toLocaleString()}</div>
+                            </div>
+                            <button class="btn-remove" onclick="removeCart(${x.id})">Remove</button>
+                        </div>
+                    `;
+                });
+                html += `
+                    <div class="cart-total">
+                        <div class="total-label">Total</div>
+                        <div class="total-amount">₹${total.toLocaleString()}</div>
+                    </div>
+                    <button class="btn-checkout" onclick="checkout(${total})">Checkout</button>
+                `;
+                document.getElementById('cartContent').innerHTML = html;
+            }
+            show('cartScreen');
+        }
+
+        function buyNow(id) {
+            cart = [];
+            addCart(id);
+            const p = PRODUCTS.find(x => x.id === id);
+            checkout(p.price);
+        }
+
+        function checkout(amt) {
+            document.getElementById('payAmount').textContent = amt.toLocaleString();
+            show('paymentScreen');
+        }
+
+        function confirmPay() {
+            const oid = 'ORD' + Date.now();
+            const total = cart.reduce((sum, x) => sum + (x.price * x.qty), 0);
+            const order = {
+                orderId: oid,
+                customer: user.name,
+                email: user.email,
+                items: cart.length,
+                total,
+                date: new Date().toLocaleString()
+            };
+
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            cart = [];
+            save();
+            updateCartBadge();
+
+            document.getElementById('orderId').textContent = oid;
+            show('successScreen');
+        }
+
+        // ==================== PROFILE ====================
+        function showProfile() {
+            alert(`👤 ${user.name}\n📧 ${user.email}\n\n📞 aryanarvindpandit@gmail.com`);
+        }
+
+        // ==================== ADMIN ====================
+        function loadAdmin() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const revenue = orders.reduce((sum, o) => sum + o.total, 0);
+
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalOrders').textContent = orders.length;
+            document.getElementById('totalRevenue').textContent = revenue.toLocaleString();
+
+            const tbody = document.getElementById('ordersTable');
+            if (orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;">No orders</td></tr>';
+            } else {
+                tbody.innerHTML = orders.reverse().map(o => `
+                    <tr>
+                        <td>${o.orderId}</td>
+                        <td>${o.customer}</td>
+                        <td>${o.email}</td>
+                        <td>${o.items}</td>
+                        <td>₹${o.total.toLocaleString()}</td>
+                        <td>${o.date}</td>
+                        <td><button class="btn-cancel" onclick="cancelOrder('${o.orderId}')">Cancel</button></td>
+                    </tr>
+                `).join('');
+            }
+
+            show('adminScreen');
+        }
+
+        function cancelOrder(oid) {
+            if (confirm('Cancel order?')) {
+                let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                orders = orders.filter(o => o.orderId !== oid);
+                localStorage.setItem('orders', JSON.stringify(orders));
+                loadAdmin();
+            }
+        }
+
+        function logout() {
+            show('loginScreen');
+        }
+
+        init();
+    </script>
+</body>
+</html>
